@@ -554,6 +554,20 @@ function buildType(ref, type) {
 
     push('');
     pushComment([
+        'Get a field number from its name',
+        '@function fieldNumberByName',
+        '@memberof ' + exportName(type),
+        '@static',
+        '@returns {Number} ' + type.name + ' field name',
+    ]);
+    push(escapeName(type.name) + '.fieldNumberByName = function fieldNumberByName(name) {');
+    ++indent;
+    push('return Object.keys(fieldNameMap).find(key => fieldNameMap[key] === value);');
+    --indent;
+    push('};');
+
+    push('');
+    pushComment([
         "Get a field name from it's numeric id",
         '@function fieldByNumber',
         '@memberof ' + exportName(type),

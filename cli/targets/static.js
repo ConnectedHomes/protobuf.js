@@ -724,7 +724,6 @@ function buildType(ref, type) {
         ++indent;
         push('...' + escapeName(type.name) + '._toObject(message, options),'),
             push('__type: "' + escapeName(type.name) + '",'),
-            push('__fieldMap: fieldNameMap,'),
             --indent;
         push('};');
         --indent;

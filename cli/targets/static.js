@@ -564,7 +564,8 @@ function buildType(ref, type) {
     ]);
     push(escapeName(type.name) + '.fieldNumberByName = function fieldNumberByName(name) {');
     ++indent;
-    push('return Object.keys(fieldNameMap).find(key => fieldNameMap[key] === value);');
+    push('const num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);');
+    push('return Number(num);');
     --indent;
     push('};');
 

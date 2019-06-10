@@ -1,24 +1,13 @@
 {
-  "name": "protobufjs",
-  "version": "6.8.7",
+  "name": "@connected-home/protobufjs",
+  "version": "0.0.1",
   "versionScheme": "~",
   "description": "Protocol Buffers for JavaScript (& TypeScript).",
-  "author": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
-  "license": "BSD-3-Clause",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dcodeIO/protobuf.js.git"
-  },
-  "bugs": "https://github.com/dcodeIO/protobuf.js/issues",
-  "homepage": "http://dcode.io/protobuf.js",
-  "keywords": [
-    "protobuf",
-    "protocol-buffers",
-    "serialization",
-    "typescript"
-  ],
+  "author": "Peter Bevan<peter.bevan@hivehome.com>",
   "main": "index.js",
   "types": "index.d.ts",
+  "private": false,
+  "public": true,
   "bin": {
     "pbjs": "bin/pbjs",
     "pbts": "bin/pbts"

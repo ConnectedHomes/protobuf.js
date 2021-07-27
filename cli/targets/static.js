@@ -558,6 +558,7 @@ function buildType(ref, type) {
         '@function fieldNumberByName',
         '@memberof ' + exportName(type),
         '@static',
+        '@param {string} Name of field to convert',
         '@returns {Number} ' + type.name + ' field name',
     ]);
     push(escapeName(type.name) + '.fieldNumberByName = function fieldNumberByName(name) {');
@@ -573,6 +574,7 @@ function buildType(ref, type) {
         '@function fieldByNumber',
         '@memberof ' + exportName(type),
         '@static',
+        '@param {number} Number of field to convert',
         '@returns {String} ' + type.name + ' field name',
     ]);
     push(escapeName(type.name) + '.fieldByNumber = function fieldByNumber(num) {');
@@ -707,7 +709,7 @@ function buildType(ref, type) {
             'Creates a plain object from ' +
                 aOrAn(type.name) +
                 ' message. Also converts values to other types if specified.',
-            '@function toObject',
+            '@function _toObject',
             '@memberof ' + exportName(type),
             '@static',
             '@param {' + exportName(type) + '} ' + (config.beautify ? 'message' : 'm') + ' ' + type.name,
@@ -717,7 +719,17 @@ function buildType(ref, type) {
 
         buildFunction(type, '_toObject', protobuf.converter.toObject(type));
         push('');
-
+        pushComment([
+            'Creates a plain object from ' +
+                aOrAn(type.name) +
+                ' message. Also converts values to other types if specified.',
+            '@function toObject',
+            '@memberof ' + exportName(type),
+            '@static',
+            '@param {' + exportName(type) + '} ' + (config.beautify ? 'message' : 'm') + ' ' + type.name,
+            '@param {$protobuf.IConversionOptions} [' + (config.beautify ? 'options' : 'o') + '] Conversion options',
+            '@returns {Object.<string,*>} Plain object',
+        ]);
         push(escapeName(type.name) + '.toObject = function (message, options) {');
         ++indent;
         push('return {');
@@ -867,10 +879,6 @@ function buildService(ref, service) {
 }
 
 function buildEnum(ref, enm) {
-    push('');
-    push(escapeName(ref) + '.' + escapeName(enm.name) + ' = {');
-    ++indent;
-
     push("");
     var comment = [
         enm.comment || enm.name + " enum.",

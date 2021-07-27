@@ -13,7 +13,8 @@ var fs   = require("fs"),
     { file: "tests/data/rpc.proto", flags: [] },
     { file: "tests/data/rpc-reserved.proto", flags: [] },
     { file: "tests/data/test.proto", flags: [] },
-    { file: "bench/data/bench.proto", flags: ["no-create", "no-verify", "no-delimited", "no-convert", "no-comments"], out: "bench/data/static_pbjs.js" }
+    { file: "tests/data/type_url.proto", flags: [] },
+    { file: "bench/data/bench.proto", flags: ["no-create", "no-verify", "no-delimited", "no-convert", "no-verify", "no-typeurl", "no-comments"], out: "bench/data/static_pbjs.js" }
 ]
 .forEach(function({ file, flags, out }) {
     var basename = file.replace(/\.proto$/, "");
@@ -21,7 +22,7 @@ var fs   = require("fs"),
         out = [ basename ].concat(flags).join("-") + ".js";
     pbjs.main([
         "--target", "static-module",
-        "--wrap", "commonjs",
+        "--wrap", flags.includes('es6') ? 'es6' : "commonjs",
         "--root", "test_" + path.basename(basename, ".js"),
         file
     ].concat(flags.map(function(flag) {

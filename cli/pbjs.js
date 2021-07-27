@@ -1,15 +1,12 @@
 "use strict";
 var path     = require("path"),
     fs       = require("fs"),
-    pkg      = require("./package.json"),
-    util     = require("./util");
-
-util.setup();
-
-var protobuf = require(util.pathToProtobufJs),
     minimist = require("minimist"),
     chalk    = require("chalk"),
-    glob     = require("glob");
+    pkg      = require("./package.json"),
+    util     = require("./util"),
+    glob     = require("glob"),
+    protobuf = require("protobufjs");
 
 var targets  = util.requireAll("./targets");
 
@@ -20,7 +17,17 @@ var targets  = util.requireAll("./targets");
  * @returns {number|undefined} Exit code, if known
  */
 exports.main = function main(args, callback) {
-    var lintDefault = "eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins";
+    var lintDefault = "eslint-disable " + [
+        "block-scoped-var",
+        "id-length",
+        "no-control-regex",
+        "no-magic-numbers",
+        "no-prototype-builtins",
+        "no-redeclare",
+        "no-shadow",
+        "no-var",
+        "sort-vars"
+    ].join(", ");
     var argv = minimist(args, {
         alias: {
             target: "t",
@@ -34,7 +41,7 @@ exports.main = function main(args, callback) {
             "force-message": "strict-message"
         },
         string: [ "target", "out", "path", "wrap", "dependency", "root", "lint" ],
-        boolean: [ "create", "encode", "decode", "verify", "convert", "delimited", "beautify", "comments", "es6", "sparse", "keep-case", "force-long", "force-number", "force-enum-string", "force-message" ],
+        boolean: [ "create", "encode", "decode", "verify", "convert", "delimited", "typeurl", "beautify", "comments", "service", "es6", "sparse", "keep-case", "force-long", "force-number", "force-enum-string", "force-message", "null-defaults" ],
         default: {
             target: "json",
             create: true,
@@ -43,15 +50,18 @@ exports.main = function main(args, callback) {
             verify: true,
             convert: true,
             delimited: true,
+            typeurl: true,
             beautify: true,
             comments: true,
+            service: true,
             es6: null,
             lint: lintDefault,
             "keep-case": false,
             "force-long": false,
             "force-number": false,
             "force-enum-string": false,
-            "force-message": false
+            "force-message": false,
+            "null-defaults": false,
         }
     });
 
@@ -123,12 +133,16 @@ exports.main = function main(args, callback) {
                 "  --no-verify      Does not generate verify functions.",
                 "  --no-convert     Does not generate convert functions like from/toObject",
                 "  --no-delimited   Does not generate delimited encode/decode functions.",
+                "  --no-typeurl     Does not generate getTypeUrl function.",
                 "  --no-beautify    Does not beautify generated code.",
                 "  --no-comments    Does not output any JSDoc comments.",
+                "  --no-service     Does not output service classes.",
                 "",
-                "  --force-long     Enfores the use of 'Long' for s-/u-/int64 and s-/fixed64 fields.",
-                "  --force-number   Enfores the use of 'number' for s-/u-/int64 and s-/fixed64 fields.",
-                "  --force-message  Enfores the use of message instances instead of plain objects.",
+                "  --force-long     Enforces the use of 'Long' for s-/u-/int64 and s-/fixed64 fields.",
+                "  --force-number   Enforces the use of 'number' for s-/u-/int64 and s-/fixed64 fields.",
+                "  --force-message  Enforces the use of message instances instead of plain objects.",
+                "",
+                "  --null-defaults  Default value for optional fields is null instead of zero value.",
                 "",
                 "usage: " + chalk.bold.green("pbjs") + " [options] file1.proto file2.json ..." + chalk.gray("  (or pipe)  ") + "other | " + chalk.bold.green("pbjs") + " [options] -",
                 ""
@@ -184,9 +198,8 @@ exports.main = function main(args, callback) {
         return resolved;
     };
 
-    // Use es6 syntax if not explicitly specified on the command line and the es6 wrapper is used
-    if (argv.wrap === "es6" || argv.es6) {
-        argv.wrap = "es6";
+    // `--wrap es6` implies `--es6` but not the other way around. You can still use e.g. `--es6 --wrap commonjs`
+    if (argv.wrap === "es6") {
         argv.es6 = true;
     }
 

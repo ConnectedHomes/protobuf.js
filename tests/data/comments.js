@@ -1,4 +1,4 @@
-/*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 "use strict";
 
 var $protobuf = require("../../minimal");
@@ -86,11 +86,11 @@ $root.Test1 = (function() {
     Test1.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.field1 != null && message.hasOwnProperty("field1"))
+        if (message.field1 != null && Object.hasOwnProperty.call(message, "field1"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.field1);
-        if (message.field2 != null && message.hasOwnProperty("field2"))
+        if (message.field2 != null && Object.hasOwnProperty.call(message, "field2"))
             writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.field2);
-        if (message.field3 != null && message.hasOwnProperty("field3"))
+        if (message.field3 != null && Object.hasOwnProperty.call(message, "field3"))
             writer.uint32(/* id 3, wireType 0 =*/24).bool(message.field3);
         return writer;
     };
@@ -239,6 +239,17 @@ $root.Test1 = (function() {
      */
     Test1.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Gets the default type url for Test1
+     * @function getTypeUrl
+     * @memberof Test1
+     * @static
+     * @returns {string} The default type url
+     */
+    Test1.getTypeUrl = function getTypeUrl() {
+        return "type.googleapis.com/Test1";
     };
 
     return Test1;
@@ -401,13 +412,24 @@ $root.Test2 = (function() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
+    /**
+     * Gets the default type url for Test2
+     * @function getTypeUrl
+     * @memberof Test2
+     * @static
+     * @returns {string} The default type url
+     */
+    Test2.getTypeUrl = function getTypeUrl() {
+        return "type.googleapis.com/Test2";
+    };
+
     return Test2;
 })();
 
 /**
  * Test3 enum.
  * @exports Test3
- * @enum {string}
+ * @enum {number}
  * @property {number} ONE=1 Value with a comment.
  * @property {number} TWO=2 TWO value
  * @property {number} THREE=3 Preferred value with a comment.

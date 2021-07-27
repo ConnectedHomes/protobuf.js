@@ -1,5 +1,4 @@
 import * as $protobuf from "../..";
-
 export class MyService extends $protobuf.rpc.Service {
     constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): MyService;
@@ -28,6 +27,7 @@ export class MyRequest implements IMyRequest {
     public static fromObject(object: { [k: string]: any }): MyRequest;
     public static toObject(message: MyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
     public toJSON(): { [k: string]: any };
+    public static getTypeUrl(): string;
 }
 
 export interface IMyResponse {
@@ -46,4 +46,5 @@ export class MyResponse implements IMyResponse {
     public static fromObject(object: { [k: string]: any }): MyResponse;
     public static toObject(message: MyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
     public toJSON(): { [k: string]: any };
+    public static getTypeUrl(): string;
 }

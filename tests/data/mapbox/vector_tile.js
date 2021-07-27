@@ -1,4 +1,4 @@
-/*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 "use strict";
 
 var $protobuf = require("../../../minimal");
@@ -224,9 +224,20 @@ $root.vector_tile = (function() {
         };
 
         /**
+         * Gets the default type url for Tile
+         * @function getTypeUrl
+         * @memberof vector_tile.Tile
+         * @static
+         * @returns {string} The default type url
+         */
+        Tile.getTypeUrl = function getTypeUrl() {
+            return "type.googleapis.com/vector_tile.Tile";
+        };
+
+        /**
          * GeomType enum.
          * @name vector_tile.Tile.GeomType
-         * @enum {string}
+         * @enum {number}
          * @property {number} UNKNOWN=0 UNKNOWN value
          * @property {number} POINT=1 POINT value
          * @property {number} LINESTRING=2 LINESTRING value
@@ -351,19 +362,19 @@ $root.vector_tile = (function() {
             Value.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.stringValue != null && message.hasOwnProperty("stringValue"))
+                if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.stringValue);
-                if (message.floatValue != null && message.hasOwnProperty("floatValue"))
+                if (message.floatValue != null && Object.hasOwnProperty.call(message, "floatValue"))
                     writer.uint32(/* id 2, wireType 5 =*/21).float(message.floatValue);
-                if (message.doubleValue != null && message.hasOwnProperty("doubleValue"))
+                if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
                     writer.uint32(/* id 3, wireType 1 =*/25).double(message.doubleValue);
-                if (message.intValue != null && message.hasOwnProperty("intValue"))
+                if (message.intValue != null && Object.hasOwnProperty.call(message, "intValue"))
                     writer.uint32(/* id 4, wireType 0 =*/32).int64(message.intValue);
-                if (message.uintValue != null && message.hasOwnProperty("uintValue"))
+                if (message.uintValue != null && Object.hasOwnProperty.call(message, "uintValue"))
                     writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.uintValue);
-                if (message.sintValue != null && message.hasOwnProperty("sintValue"))
+                if (message.sintValue != null && Object.hasOwnProperty.call(message, "sintValue"))
                     writer.uint32(/* id 6, wireType 0 =*/48).sint64(message.sintValue);
-                if (message.boolValue != null && message.hasOwnProperty("boolValue"))
+                if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.boolValue);
                 return writer;
             };
@@ -600,6 +611,17 @@ $root.vector_tile = (function() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
+            /**
+             * Gets the default type url for Value
+             * @function getTypeUrl
+             * @memberof vector_tile.Tile.Value
+             * @static
+             * @returns {string} The default type url
+             */
+            Value.getTypeUrl = function getTypeUrl() {
+                return "type.googleapis.com/vector_tile.Tile.Value";
+            };
+
             return Value;
         })();
 
@@ -688,7 +710,7 @@ $root.vector_tile = (function() {
             Feature.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.id != null && message.hasOwnProperty("id"))
+                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.id);
                 if (message.tags != null && message.tags.length) {
                     writer.uint32(/* id 2, wireType 2 =*/18).fork();
@@ -696,7 +718,7 @@ $root.vector_tile = (function() {
                         writer.uint32(message.tags[i]);
                     writer.ldelim();
                 }
-                if (message.type != null && message.hasOwnProperty("type"))
+                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
                 if (message.geometry != null && message.geometry.length) {
                     writer.uint32(/* id 4, wireType 2 =*/34).fork();
@@ -941,6 +963,17 @@ $root.vector_tile = (function() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
+            /**
+             * Gets the default type url for Feature
+             * @function getTypeUrl
+             * @memberof vector_tile.Tile.Feature
+             * @static
+             * @returns {string} The default type url
+             */
+            Feature.getTypeUrl = function getTypeUrl() {
+                return "type.googleapis.com/vector_tile.Tile.Feature";
+            };
+
             return Feature;
         })();
 
@@ -1058,7 +1091,7 @@ $root.vector_tile = (function() {
                 if (message.values != null && message.values.length)
                     for (var i = 0; i < message.values.length; ++i)
                         $root.vector_tile.Tile.Value.encode(message.values[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                if (message.extent != null && message.hasOwnProperty("extent"))
+                if (message.extent != null && Object.hasOwnProperty.call(message, "extent"))
                     writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.extent);
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.version);
                 return writer;
@@ -1297,6 +1330,17 @@ $root.vector_tile = (function() {
              */
             Layer.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Layer
+             * @function getTypeUrl
+             * @memberof vector_tile.Tile.Layer
+             * @static
+             * @returns {string} The default type url
+             */
+            Layer.getTypeUrl = function getTypeUrl() {
+                return "type.googleapis.com/vector_tile.Tile.Layer";
             };
 
             return Layer;

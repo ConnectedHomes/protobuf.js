@@ -1,11 +1,11 @@
 "use strict";
 module.exports = static_target;
 
-var protobuf   = require("../.."),
-    UglifyJS   = require("uglify-js"),
+var UglifyJS   = require("uglify-js"),
     espree     = require("espree"),
     escodegen  = require("escodegen"),
-    estraverse = require("estraverse");
+    estraverse = require("estraverse"),
+    protobuf   = require("protobufjs");
 
 var Type      = protobuf.Type,
     Service   = protobuf.Service,
@@ -109,6 +109,10 @@ function aOrAn(name) {
 function buildNamespace(ref, ns) {
     if (!ns)
         return;
+
+    if (ns instanceof Service && !config.service)
+        return;
+
     if (ns.name !== "") {
         push("");
         if (!ref && config.es6)
@@ -390,7 +394,7 @@ function buildType(ref, type) {
         if (config.comments) {
             push("");
             var jsType = toJsType(field);
-            if (field.optional && !field.map && !field.repeated && field.resolvedType instanceof Type)
+            if (field.optional && !field.map && !field.repeated && (field.resolvedType instanceof Type || config["null-defaults"]) || field.partOf)
                 jsType = jsType + "|null|undefined";
             pushComment([
                 field.comment || type.name + " " + field.name + ".",
@@ -406,6 +410,8 @@ function buildType(ref, type) {
             push(escapeName(type.name) + ".prototype" + prop + " = $util.emptyArray;"); // overwritten in constructor
         else if (field.map)
             push(escapeName(type.name) + ".prototype" + prop + " = $util.emptyObject;"); // overwritten in constructor
+        else if (field.partOf || field.optional && config["null-defaults"])
+            push(escapeName(type.name) + ".prototype" + prop + " = null;"); // do not set default value for oneof members
         else if (field.long)
             push(escapeName(type.name) + ".prototype" + prop + " = $util.Long ? $util.Long.fromBits("
                     + JSON.stringify(field.typeDefault.low) + ","
@@ -583,6 +589,22 @@ function buildType(ref, type) {
         --indent;
         push("};");
     }
+
+    if (config.typeurl) {
+        push("");
+        pushComment([
+            "Gets the default type url for " + type.name,
+            "@function getTypeUrl",
+            "@memberof " + exportName(type),
+            "@static",
+            "@returns {string} The default type url"
+        ]);
+        push(escapeName(type.name) + ".getTypeUrl = function getTypeUrl() {");
+        ++indent;
+            push("return \"type.googleapis.com/" + exportName(type) + "\";");
+        --indent;
+        push("};");
+    }
 }
 
 function buildService(ref, service) {
@@ -675,14 +697,17 @@ function buildEnum(ref, enm) {
     var comment = [
         enm.comment || enm.name + " enum.",
         enm.parent instanceof protobuf.Root ? "@exports " + escapeName(enm.name) : "@name " + exportName(enm),
-        config.forceEnumString ? "@enum {number}" : "@enum {string}",
+        config.forceEnumString ? "@enum {string}" : "@enum {number}",
     ];
     Object.keys(enm.values).forEach(function(key) {
         var val = config.forceEnumString ? key : enm.values[key];
         comment.push((config.forceEnumString ? "@property {string} " : "@property {number} ") + key + "=" + val + " " + (enm.comments[key] || key + " value"));
     });
     pushComment(comment);
-    push(escapeName(ref) + "." + escapeName(enm.name) + " = (function() {");
+    if (!ref && config.es6)
+        push("export const " + escapeName(enm.name) + " = " + escapeName(ref) + "." + escapeName(enm.name) + " = (() => {");
+    else
+        push(escapeName(ref) + "." + escapeName(enm.name) + " = (function() {");
     ++indent;
         push((config.es6 ? "const" : "var") + " valuesById = {}, values = Object.create(valuesById);");
         var aliased = [];

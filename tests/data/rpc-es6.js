@@ -1,5 +1,7 @@
-/*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
-import * as $protobuf from "../../minimal";
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
+"use strict";
+
+var $protobuf = require("../../minimal");
 
 // Common aliases
 const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
@@ -131,7 +133,7 @@ export const MyRequest = $root.MyRequest = (() => {
     MyRequest.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.path != null && message.hasOwnProperty("path"))
+        if (message.path != null && Object.hasOwnProperty.call(message, "path"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
         return writer;
     };
@@ -259,6 +261,17 @@ export const MyRequest = $root.MyRequest = (() => {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
+    /**
+     * Gets the default type url for MyRequest
+     * @function getTypeUrl
+     * @memberof MyRequest
+     * @static
+     * @returns {string} The default type url
+     */
+    MyRequest.getTypeUrl = function getTypeUrl() {
+        return "type.googleapis.com/MyRequest";
+    };
+
     return MyRequest;
 })();
 
@@ -318,7 +331,7 @@ export const MyResponse = $root.MyResponse = (() => {
     MyResponse.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.status != null && message.hasOwnProperty("status"))
+        if (message.status != null && Object.hasOwnProperty.call(message, "status"))
             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.status);
         return writer;
     };
@@ -446,7 +459,18 @@ export const MyResponse = $root.MyResponse = (() => {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
+    /**
+     * Gets the default type url for MyResponse
+     * @function getTypeUrl
+     * @memberof MyResponse
+     * @static
+     * @returns {string} The default type url
+     */
+    MyResponse.getTypeUrl = function getTypeUrl() {
+        return "type.googleapis.com/MyResponse";
+    };
+
     return MyResponse;
 })();
 
-export { $root as default };
+module.exports = $root;

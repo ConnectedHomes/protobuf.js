@@ -9,6 +9,14 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.test_test || ($protobuf.roots.test_test = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.jspb = (function() {
 
     /**
@@ -43,12 +51,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IEmpty=} [properties] Properties to set
              */
+
             function Empty(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Empty.type = 'Empty';
+            Empty.prototype.type = 'Empty';
 
             /**
              * Creates a new Empty instance using the specified properties.
@@ -61,6 +70,36 @@ $root.jspb = (function() {
             Empty.create = function create(properties) {
                 return new Empty(properties);
             };
+
+            var fieldNameMap = {
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.Empty
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Empty field name
+             */
+            Empty.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.Empty
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Empty field name
+             */
+            Empty.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Empty.prototype.fieldByNumber = Empty.fieldByNumber;
 
             /**
              * Encodes the specified Empty message. Does not implicitly {@link jspb.test.Empty.verify|verify} messages.
@@ -162,6 +201,19 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @function _toObject
+             * @memberof jspb.test.Empty
+             * @static
+             * @param {jspb.test.Empty} message Empty
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Empty._toObject = function _toObject() {
+                return {};
+            };
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
              * @function toObject
              * @memberof jspb.test.Empty
              * @static
@@ -169,8 +221,11 @@ $root.jspb = (function() {
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Empty.toObject = function toObject() {
-                return {};
+            Empty.toObject = function (message, options) {
+                return {
+                    ...Empty._toObject(message, options),
+                    __type: "Empty",
+                };
             };
 
             /**
@@ -180,7 +235,7 @@ $root.jspb = (function() {
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Empty.prototype.toJSON = function toJSON() {
+            Empty.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -229,12 +284,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IEnumContainer=} [properties] Properties to set
              */
+
             function EnumContainer(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            EnumContainer.type = 'EnumContainer';
+            EnumContainer.prototype.type = 'EnumContainer';
 
             /**
              * EnumContainer outerEnum.
@@ -255,6 +311,37 @@ $root.jspb = (function() {
             EnumContainer.create = function create(properties) {
                 return new EnumContainer(properties);
             };
+
+            var fieldNameMap = {
+                1: 'outerEnum'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.EnumContainer
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} EnumContainer field name
+             */
+            EnumContainer.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.EnumContainer
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} EnumContainer field name
+             */
+            EnumContainer.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            EnumContainer.prototype.fieldByNumber = EnumContainer.fieldByNumber;
 
             /**
              * Encodes the specified EnumContainer message. Does not implicitly {@link jspb.test.EnumContainer.verify|verify} messages.
@@ -380,14 +467,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from an EnumContainer message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.EnumContainer
              * @static
              * @param {jspb.test.EnumContainer} message EnumContainer
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            EnumContainer.toObject = function toObject(message, options) {
+            EnumContainer._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -399,13 +486,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from an EnumContainer message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.EnumContainer
+             * @static
+             * @param {jspb.test.EnumContainer} message EnumContainer
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            EnumContainer.toObject = function (message, options) {
+                return {
+                    ...EnumContainer._toObject(message, options),
+                    __type: "EnumContainer",
+                };
+            };
+
+            /**
              * Converts this EnumContainer to JSON.
              * @function toJSON
              * @memberof jspb.test.EnumContainer
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            EnumContainer.prototype.toJSON = function toJSON() {
+            EnumContainer.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -442,13 +545,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ISimple1=} [properties] Properties to set
              */
+
             function Simple1(properties) {
-                this.aRepeatedString = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Simple1.type = 'Simple1';
+            Simple1.prototype.type = 'Simple1';
 
             /**
              * Simple1 aString.
@@ -485,6 +588,39 @@ $root.jspb = (function() {
             Simple1.create = function create(properties) {
                 return new Simple1(properties);
             };
+
+            var fieldNameMap = {
+                1: 'aString',
+                2: 'aRepeatedString',
+                3: 'aBoolean'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.Simple1
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Simple1 field name
+             */
+            Simple1.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.Simple1
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Simple1 field name
+             */
+            Simple1.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Simple1.prototype.fieldByNumber = Simple1.fieldByNumber;
 
             /**
              * Encodes the specified Simple1 message. Does not implicitly {@link jspb.test.Simple1.verify|verify} messages.
@@ -629,14 +765,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a Simple1 message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.Simple1
              * @static
              * @param {jspb.test.Simple1} message Simple1
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Simple1.toObject = function toObject(message, options) {
+            Simple1._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -659,13 +795,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a Simple1 message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.Simple1
+             * @static
+             * @param {jspb.test.Simple1} message Simple1
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Simple1.toObject = function (message, options) {
+                return {
+                    ...Simple1._toObject(message, options),
+                    __type: "Simple1",
+                };
+            };
+
+            /**
              * Converts this Simple1 to JSON.
              * @function toJSON
              * @memberof jspb.test.Simple1
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Simple1.prototype.toJSON = function toJSON() {
+            Simple1.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -701,13 +853,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ISimple2=} [properties] Properties to set
              */
+
             function Simple2(properties) {
-                this.aRepeatedString = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Simple2.type = 'Simple2';
+            Simple2.prototype.type = 'Simple2';
 
             /**
              * Simple2 aString.
@@ -736,6 +888,38 @@ $root.jspb = (function() {
             Simple2.create = function create(properties) {
                 return new Simple2(properties);
             };
+
+            var fieldNameMap = {
+                1: 'aString',
+                2: 'aRepeatedString'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.Simple2
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Simple2 field name
+             */
+            Simple2.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.Simple2
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Simple2 field name
+             */
+            Simple2.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Simple2.prototype.fieldByNumber = Simple2.fieldByNumber;
 
             /**
              * Encodes the specified Simple2 message. Does not implicitly {@link jspb.test.Simple2.verify|verify} messages.
@@ -870,14 +1054,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a Simple2 message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.Simple2
              * @static
              * @param {jspb.test.Simple2} message Simple2
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Simple2.toObject = function toObject(message, options) {
+            Simple2._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -896,13 +1080,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a Simple2 message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.Simple2
+             * @static
+             * @param {jspb.test.Simple2} message Simple2
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Simple2.toObject = function (message, options) {
+                return {
+                    ...Simple2._toObject(message, options),
+                    __type: "Simple2",
+                };
+            };
+
+            /**
              * Converts this Simple2 to JSON.
              * @function toJSON
              * @memberof jspb.test.Simple2
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Simple2.prototype.toJSON = function toJSON() {
+            Simple2.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -940,12 +1140,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ISpecialCases=} [properties] Properties to set
              */
+
             function SpecialCases(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            SpecialCases.type = 'SpecialCases';
+            SpecialCases.prototype.type = 'SpecialCases';
 
             /**
              * SpecialCases normal.
@@ -990,6 +1191,40 @@ $root.jspb = (function() {
             SpecialCases.create = function create(properties) {
                 return new SpecialCases(properties);
             };
+
+            var fieldNameMap = {
+                1: 'normal',
+                2: 'default',
+                3: 'function',
+                4: 'var'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.SpecialCases
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} SpecialCases field name
+             */
+            SpecialCases.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.SpecialCases
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} SpecialCases field name
+             */
+            SpecialCases.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            SpecialCases.prototype.fieldByNumber = SpecialCases.fieldByNumber;
 
             /**
              * Encodes the specified SpecialCases message. Does not implicitly {@link jspb.test.SpecialCases.verify|verify} messages.
@@ -1132,14 +1367,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a SpecialCases message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.SpecialCases
              * @static
              * @param {jspb.test.SpecialCases} message SpecialCases
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            SpecialCases.toObject = function toObject(message, options) {
+            SpecialCases._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -1161,13 +1396,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a SpecialCases message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.SpecialCases
+             * @static
+             * @param {jspb.test.SpecialCases} message SpecialCases
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SpecialCases.toObject = function (message, options) {
+                return {
+                    ...SpecialCases._toObject(message, options),
+                    __type: "SpecialCases",
+                };
+            };
+
+            /**
              * Converts this SpecialCases to JSON.
              * @function toJSON
              * @memberof jspb.test.SpecialCases
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            SpecialCases.prototype.toJSON = function toJSON() {
+            SpecialCases.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -1206,14 +1457,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IOptionalFields=} [properties] Properties to set
              */
+
             function OptionalFields(properties) {
-                this.aRepeatedMessage = [];
-                this.aRepeatedString = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            OptionalFields.type = 'OptionalFields';
+            OptionalFields.prototype.type = 'OptionalFields';
 
             /**
              * OptionalFields aString.
@@ -1266,6 +1516,41 @@ $root.jspb = (function() {
             OptionalFields.create = function create(properties) {
                 return new OptionalFields(properties);
             };
+
+            var fieldNameMap = {
+                1: 'aString',
+                2: 'aBool',
+                3: 'aNestedMessage',
+                4: 'aRepeatedMessage',
+                5: 'aRepeatedString'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.OptionalFields
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} OptionalFields field name
+             */
+            OptionalFields.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.OptionalFields
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} OptionalFields field name
+             */
+            OptionalFields.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            OptionalFields.prototype.fieldByNumber = OptionalFields.fieldByNumber;
 
             /**
              * Encodes the specified OptionalFields message. Does not implicitly {@link jspb.test.OptionalFields.verify|verify} messages.
@@ -1452,14 +1737,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from an OptionalFields message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.OptionalFields
              * @static
              * @param {jspb.test.OptionalFields} message OptionalFields
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            OptionalFields.toObject = function toObject(message, options) {
+            OptionalFields._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -1492,13 +1777,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from an OptionalFields message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.OptionalFields
+             * @static
+             * @param {jspb.test.OptionalFields} message OptionalFields
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            OptionalFields.toObject = function (message, options) {
+                return {
+                    ...OptionalFields._toObject(message, options),
+                    __type: "OptionalFields",
+                };
+            };
+
+            /**
              * Converts this OptionalFields to JSON.
              * @function toJSON
              * @memberof jspb.test.OptionalFields
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            OptionalFields.prototype.toJSON = function toJSON() {
+            OptionalFields.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -1530,12 +1831,13 @@ $root.jspb = (function() {
                  * @constructor
                  * @param {jspb.test.OptionalFields.INested=} [properties] Properties to set
                  */
+
                 function Nested(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                Nested.type = 'Nested';
+                Nested.prototype.type = 'Nested';
 
                 /**
                  * Nested anInt.
@@ -1556,6 +1858,37 @@ $root.jspb = (function() {
                 Nested.create = function create(properties) {
                     return new Nested(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'anInt'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof jspb.test.OptionalFields.Nested
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} Nested field name
+                 */
+                Nested.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof jspb.test.OptionalFields.Nested
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} Nested field name
+                 */
+                Nested.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                Nested.prototype.fieldByNumber = Nested.fieldByNumber;
 
                 /**
                  * Encodes the specified Nested message. Does not implicitly {@link jspb.test.OptionalFields.Nested.verify|verify} messages.
@@ -1668,14 +2001,14 @@ $root.jspb = (function() {
 
                 /**
                  * Creates a plain object from a Nested message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof jspb.test.OptionalFields.Nested
                  * @static
                  * @param {jspb.test.OptionalFields.Nested} message Nested
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Nested.toObject = function toObject(message, options) {
+                Nested._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -1687,13 +2020,29 @@ $root.jspb = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a Nested message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof jspb.test.OptionalFields.Nested
+                 * @static
+                 * @param {jspb.test.OptionalFields.Nested} message Nested
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Nested.toObject = function (message, options) {
+                    return {
+                        ...Nested._toObject(message, options),
+                        __type: "Nested",
+                    };
+                };
+
+                /**
                  * Converts this Nested to JSON.
                  * @function toJSON
                  * @memberof jspb.test.OptionalFields.Nested
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Nested.prototype.toJSON = function toJSON() {
+                Nested.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -1739,14 +2088,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IHasExtensions=} [properties] Properties to set
              */
+
             function HasExtensions(properties) {
-                this[".jspb.test.IndirectExtension.repeatedStr"] = [];
-                this[".jspb.test.IndirectExtension.repeatedSimple"] = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            HasExtensions.type = 'HasExtensions';
+            HasExtensions.prototype.type = 'HasExtensions';
 
             /**
              * HasExtensions str1.
@@ -1831,6 +2179,45 @@ $root.jspb = (function() {
             HasExtensions.create = function create(properties) {
                 return new HasExtensions(properties);
             };
+
+            var fieldNameMap = {
+                1: 'str1',
+                2: 'str2',
+                3: 'str3',
+                100: '.jspb.test.IsExtension.extField',
+                101: '.jspb.test.IndirectExtension.simple',
+                102: '.jspb.test.IndirectExtension.str',
+                103: '.jspb.test.IndirectExtension.repeatedStr',
+                104: '.jspb.test.IndirectExtension.repeatedSimple',
+                105: '.jspb.test.simple1'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.HasExtensions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} HasExtensions field name
+             */
+            HasExtensions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.HasExtensions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} HasExtensions field name
+             */
+            HasExtensions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            HasExtensions.prototype.fieldByNumber = HasExtensions.fieldByNumber;
 
             /**
              * Encodes the specified HasExtensions message. Does not implicitly {@link jspb.test.HasExtensions.verify|verify} messages.
@@ -2067,14 +2454,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a HasExtensions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.HasExtensions
              * @static
              * @param {jspb.test.HasExtensions} message HasExtensions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            HasExtensions.toObject = function toObject(message, options) {
+            HasExtensions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -2119,13 +2506,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a HasExtensions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.HasExtensions
+             * @static
+             * @param {jspb.test.HasExtensions} message HasExtensions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            HasExtensions.toObject = function (message, options) {
+                return {
+                    ...HasExtensions._toObject(message, options),
+                    __type: "HasExtensions",
+                };
+            };
+
+            /**
              * Converts this HasExtensions to JSON.
              * @function toJSON
              * @memberof jspb.test.HasExtensions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            HasExtensions.prototype.toJSON = function toJSON() {
+            HasExtensions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -2164,14 +2567,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IComplex=} [properties] Properties to set
              */
+
             function Complex(properties) {
-                this.aRepeatedMessage = [];
-                this.aRepeatedString = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Complex.type = 'Complex';
+            Complex.prototype.type = 'Complex';
 
             /**
              * Complex aString.
@@ -2224,6 +2626,41 @@ $root.jspb = (function() {
             Complex.create = function create(properties) {
                 return new Complex(properties);
             };
+
+            var fieldNameMap = {
+                1: 'aString',
+                9: 'anOutOfOrderBool',
+                4: 'aNestedMessage',
+                5: 'aRepeatedMessage',
+                7: 'aRepeatedString'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.Complex
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Complex field name
+             */
+            Complex.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.Complex
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Complex field name
+             */
+            Complex.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Complex.prototype.fieldByNumber = Complex.fieldByNumber;
 
             /**
              * Encodes the specified Complex message. Does not implicitly {@link jspb.test.Complex.verify|verify} messages.
@@ -2410,14 +2847,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a Complex message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.Complex
              * @static
              * @param {jspb.test.Complex} message Complex
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Complex.toObject = function toObject(message, options) {
+            Complex._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -2450,13 +2887,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a Complex message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.Complex
+             * @static
+             * @param {jspb.test.Complex} message Complex
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Complex.toObject = function (message, options) {
+                return {
+                    ...Complex._toObject(message, options),
+                    __type: "Complex",
+                };
+            };
+
+            /**
              * Converts this Complex to JSON.
              * @function toJSON
              * @memberof jspb.test.Complex
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Complex.prototype.toJSON = function toJSON() {
+            Complex.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -2488,12 +2941,13 @@ $root.jspb = (function() {
                  * @constructor
                  * @param {jspb.test.Complex.INested=} [properties] Properties to set
                  */
+
                 function Nested(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                Nested.type = 'Nested';
+                Nested.prototype.type = 'Nested';
 
                 /**
                  * Nested anInt.
@@ -2514,6 +2968,37 @@ $root.jspb = (function() {
                 Nested.create = function create(properties) {
                     return new Nested(properties);
                 };
+
+                var fieldNameMap = {
+                    2: 'anInt'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof jspb.test.Complex.Nested
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} Nested field name
+                 */
+                Nested.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof jspb.test.Complex.Nested
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} Nested field name
+                 */
+                Nested.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                Nested.prototype.fieldByNumber = Nested.fieldByNumber;
 
                 /**
                  * Encodes the specified Nested message. Does not implicitly {@link jspb.test.Complex.Nested.verify|verify} messages.
@@ -2626,14 +3111,14 @@ $root.jspb = (function() {
 
                 /**
                  * Creates a plain object from a Nested message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof jspb.test.Complex.Nested
                  * @static
                  * @param {jspb.test.Complex.Nested} message Nested
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Nested.toObject = function toObject(message, options) {
+                Nested._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -2645,13 +3130,29 @@ $root.jspb = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a Nested message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof jspb.test.Complex.Nested
+                 * @static
+                 * @param {jspb.test.Complex.Nested} message Nested
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Nested.toObject = function (message, options) {
+                    return {
+                        ...Nested._toObject(message, options),
+                        __type: "Nested",
+                    };
+                };
+
+                /**
                  * Converts this Nested to JSON.
                  * @function toJSON
                  * @memberof jspb.test.Complex.Nested
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Nested.prototype.toJSON = function toJSON() {
+                Nested.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -2688,12 +3189,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IOuterMessage=} [properties] Properties to set
              */
+
             function OuterMessage(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            OuterMessage.type = 'OuterMessage';
+            OuterMessage.prototype.type = 'OuterMessage';
 
             /**
              * Creates a new OuterMessage instance using the specified properties.
@@ -2706,6 +3208,36 @@ $root.jspb = (function() {
             OuterMessage.create = function create(properties) {
                 return new OuterMessage(properties);
             };
+
+            var fieldNameMap = {
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.OuterMessage
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} OuterMessage field name
+             */
+            OuterMessage.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.OuterMessage
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} OuterMessage field name
+             */
+            OuterMessage.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            OuterMessage.prototype.fieldByNumber = OuterMessage.fieldByNumber;
 
             /**
              * Encodes the specified OuterMessage message. Does not implicitly {@link jspb.test.OuterMessage.verify|verify} messages.
@@ -2807,6 +3339,19 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from an OuterMessage message. Also converts values to other types if specified.
+             * @function _toObject
+             * @memberof jspb.test.OuterMessage
+             * @static
+             * @param {jspb.test.OuterMessage} message OuterMessage
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            OuterMessage._toObject = function _toObject() {
+                return {};
+            };
+
+            /**
+             * Creates a plain object from an OuterMessage message. Also converts values to other types if specified.
              * @function toObject
              * @memberof jspb.test.OuterMessage
              * @static
@@ -2814,8 +3359,11 @@ $root.jspb = (function() {
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            OuterMessage.toObject = function toObject() {
-                return {};
+            OuterMessage.toObject = function (message, options) {
+                return {
+                    ...OuterMessage._toObject(message, options),
+                    __type: "OuterMessage",
+                };
             };
 
             /**
@@ -2825,7 +3373,7 @@ $root.jspb = (function() {
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            OuterMessage.prototype.toJSON = function toJSON() {
+            OuterMessage.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -2857,12 +3405,13 @@ $root.jspb = (function() {
                  * @constructor
                  * @param {jspb.test.OuterMessage.IComplex=} [properties] Properties to set
                  */
+
                 function Complex(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                Complex.type = 'Complex';
+                Complex.prototype.type = 'Complex';
 
                 /**
                  * Complex innerComplexField.
@@ -2883,6 +3432,37 @@ $root.jspb = (function() {
                 Complex.create = function create(properties) {
                     return new Complex(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'innerComplexField'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof jspb.test.OuterMessage.Complex
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} Complex field name
+                 */
+                Complex.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof jspb.test.OuterMessage.Complex
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} Complex field name
+                 */
+                Complex.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                Complex.prototype.fieldByNumber = Complex.fieldByNumber;
 
                 /**
                  * Encodes the specified Complex message. Does not implicitly {@link jspb.test.OuterMessage.Complex.verify|verify} messages.
@@ -2995,14 +3575,14 @@ $root.jspb = (function() {
 
                 /**
                  * Creates a plain object from a Complex message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof jspb.test.OuterMessage.Complex
                  * @static
                  * @param {jspb.test.OuterMessage.Complex} message Complex
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Complex.toObject = function toObject(message, options) {
+                Complex._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -3014,13 +3594,29 @@ $root.jspb = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a Complex message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof jspb.test.OuterMessage.Complex
+                 * @static
+                 * @param {jspb.test.OuterMessage.Complex} message Complex
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Complex.toObject = function (message, options) {
+                    return {
+                        ...Complex._toObject(message, options),
+                        __type: "Complex",
+                    };
+                };
+
+                /**
                  * Converts this Complex to JSON.
                  * @function toJSON
                  * @memberof jspb.test.OuterMessage.Complex
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Complex.prototype.toJSON = function toJSON() {
+                Complex.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -3058,12 +3654,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IIsExtension=} [properties] Properties to set
              */
+
             function IsExtension(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            IsExtension.type = 'IsExtension';
+            IsExtension.prototype.type = 'IsExtension';
 
             /**
              * IsExtension ext1.
@@ -3084,6 +3681,37 @@ $root.jspb = (function() {
             IsExtension.create = function create(properties) {
                 return new IsExtension(properties);
             };
+
+            var fieldNameMap = {
+                1: 'ext1'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.IsExtension
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} IsExtension field name
+             */
+            IsExtension.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.IsExtension
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} IsExtension field name
+             */
+            IsExtension.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            IsExtension.prototype.fieldByNumber = IsExtension.fieldByNumber;
 
             /**
              * Encodes the specified IsExtension message. Does not implicitly {@link jspb.test.IsExtension.verify|verify} messages.
@@ -3196,14 +3824,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from an IsExtension message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.IsExtension
              * @static
              * @param {jspb.test.IsExtension} message IsExtension
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            IsExtension.toObject = function toObject(message, options) {
+            IsExtension._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -3215,13 +3843,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from an IsExtension message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.IsExtension
+             * @static
+             * @param {jspb.test.IsExtension} message IsExtension
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            IsExtension.toObject = function (message, options) {
+                return {
+                    ...IsExtension._toObject(message, options),
+                    __type: "IsExtension",
+                };
+            };
+
+            /**
              * Converts this IsExtension to JSON.
              * @function toJSON
              * @memberof jspb.test.IsExtension
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            IsExtension.prototype.toJSON = function toJSON() {
+            IsExtension.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -3255,12 +3899,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IIndirectExtension=} [properties] Properties to set
              */
+
             function IndirectExtension(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            IndirectExtension.type = 'IndirectExtension';
+            IndirectExtension.prototype.type = 'IndirectExtension';
 
             /**
              * Creates a new IndirectExtension instance using the specified properties.
@@ -3273,6 +3918,36 @@ $root.jspb = (function() {
             IndirectExtension.create = function create(properties) {
                 return new IndirectExtension(properties);
             };
+
+            var fieldNameMap = {
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.IndirectExtension
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} IndirectExtension field name
+             */
+            IndirectExtension.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.IndirectExtension
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} IndirectExtension field name
+             */
+            IndirectExtension.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            IndirectExtension.prototype.fieldByNumber = IndirectExtension.fieldByNumber;
 
             /**
              * Encodes the specified IndirectExtension message. Does not implicitly {@link jspb.test.IndirectExtension.verify|verify} messages.
@@ -3374,6 +4049,19 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from an IndirectExtension message. Also converts values to other types if specified.
+             * @function _toObject
+             * @memberof jspb.test.IndirectExtension
+             * @static
+             * @param {jspb.test.IndirectExtension} message IndirectExtension
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            IndirectExtension._toObject = function _toObject() {
+                return {};
+            };
+
+            /**
+             * Creates a plain object from an IndirectExtension message. Also converts values to other types if specified.
              * @function toObject
              * @memberof jspb.test.IndirectExtension
              * @static
@@ -3381,8 +4069,11 @@ $root.jspb = (function() {
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            IndirectExtension.toObject = function toObject() {
-                return {};
+            IndirectExtension.toObject = function (message, options) {
+                return {
+                    ...IndirectExtension._toObject(message, options),
+                    __type: "IndirectExtension",
+                };
             };
 
             /**
@@ -3392,7 +4083,7 @@ $root.jspb = (function() {
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            IndirectExtension.prototype.toJSON = function toJSON() {
+            IndirectExtension.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -3432,12 +4123,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IDefaultValues=} [properties] Properties to set
              */
+
             function DefaultValues(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            DefaultValues.type = 'DefaultValues';
+            DefaultValues.prototype.type = 'DefaultValues';
 
             /**
              * DefaultValues stringField.
@@ -3498,6 +4190,42 @@ $root.jspb = (function() {
             DefaultValues.create = function create(properties) {
                 return new DefaultValues(properties);
             };
+
+            var fieldNameMap = {
+                1: 'stringField',
+                2: 'boolField',
+                3: 'intField',
+                4: 'enumField',
+                6: 'emptyField',
+                8: 'bytesField'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.DefaultValues
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} DefaultValues field name
+             */
+            DefaultValues.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.DefaultValues
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} DefaultValues field name
+             */
+            DefaultValues.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            DefaultValues.prototype.fieldByNumber = DefaultValues.fieldByNumber;
 
             /**
              * Encodes the specified DefaultValues message. Does not implicitly {@link jspb.test.DefaultValues.verify|verify} messages.
@@ -3683,14 +4411,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a DefaultValues message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.DefaultValues
              * @static
              * @param {jspb.test.DefaultValues} message DefaultValues
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            DefaultValues.toObject = function toObject(message, options) {
+            DefaultValues._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -3735,13 +4463,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a DefaultValues message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.DefaultValues
+             * @static
+             * @param {jspb.test.DefaultValues} message DefaultValues
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DefaultValues.toObject = function (message, options) {
+                return {
+                    ...DefaultValues._toObject(message, options),
+                    __type: "DefaultValues",
+                };
+            };
+
+            /**
              * Converts this DefaultValues to JSON.
              * @function toJSON
              * @memberof jspb.test.DefaultValues
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            DefaultValues.prototype.toJSON = function toJSON() {
+            DefaultValues.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -3797,14 +4541,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IFloatingPointFields=} [properties] Properties to set
              */
+
             function FloatingPointFields(properties) {
-                this.repeatedFloatField = [];
-                this.repeatedDoubleField = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            FloatingPointFields.type = 'FloatingPointFields';
+            FloatingPointFields.prototype.type = 'FloatingPointFields';
 
             /**
              * FloatingPointFields optionalFloatField.
@@ -3881,6 +4624,44 @@ $root.jspb = (function() {
             FloatingPointFields.create = function create(properties) {
                 return new FloatingPointFields(properties);
             };
+
+            var fieldNameMap = {
+                1: 'optionalFloatField',
+                2: 'requiredFloatField',
+                3: 'repeatedFloatField',
+                4: 'defaultFloatField',
+                5: 'optionalDoubleField',
+                6: 'requiredDoubleField',
+                7: 'repeatedDoubleField',
+                8: 'defaultDoubleField'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.FloatingPointFields
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} FloatingPointFields field name
+             */
+            FloatingPointFields.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.FloatingPointFields
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} FloatingPointFields field name
+             */
+            FloatingPointFields.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            FloatingPointFields.prototype.fieldByNumber = FloatingPointFields.fieldByNumber;
 
             /**
              * Encodes the specified FloatingPointFields message. Does not implicitly {@link jspb.test.FloatingPointFields.verify|verify} messages.
@@ -4097,14 +4878,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a FloatingPointFields message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.FloatingPointFields
              * @static
              * @param {jspb.test.FloatingPointFields} message FloatingPointFields
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            FloatingPointFields.toObject = function toObject(message, options) {
+            FloatingPointFields._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -4146,13 +4927,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a FloatingPointFields message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.FloatingPointFields
+             * @static
+             * @param {jspb.test.FloatingPointFields} message FloatingPointFields
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FloatingPointFields.toObject = function (message, options) {
+                return {
+                    ...FloatingPointFields._toObject(message, options),
+                    __type: "FloatingPointFields",
+                };
+            };
+
+            /**
              * Converts this FloatingPointFields to JSON.
              * @function toJSON
              * @memberof jspb.test.FloatingPointFields
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            FloatingPointFields.prototype.toJSON = function toJSON() {
+            FloatingPointFields.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -4192,13 +4989,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestClone=} [properties] Properties to set
              */
+
             function TestClone(properties) {
-                this.simple2 = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestClone.type = 'TestClone';
+            TestClone.prototype.type = 'TestClone';
 
             /**
              * TestClone str.
@@ -4259,6 +5056,42 @@ $root.jspb = (function() {
             TestClone.create = function create(properties) {
                 return new TestClone(properties);
             };
+
+            var fieldNameMap = {
+                1: 'str',
+                3: 'simple1',
+                5: 'simple2',
+                6: 'bytesField',
+                7: 'unused',
+                100: '.jspb.test.CloneExtension.extField'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestClone
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestClone field name
+             */
+            TestClone.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestClone
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestClone field name
+             */
+            TestClone.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestClone.prototype.fieldByNumber = TestClone.fieldByNumber;
 
             /**
              * Encodes the specified TestClone message. Does not implicitly {@link jspb.test.TestClone.verify|verify} messages.
@@ -4451,14 +5284,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestClone message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.TestClone
              * @static
              * @param {jspb.test.TestClone} message TestClone
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestClone.toObject = function toObject(message, options) {
+            TestClone._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -4496,13 +5329,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a TestClone message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.TestClone
+             * @static
+             * @param {jspb.test.TestClone} message TestClone
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestClone.toObject = function (message, options) {
+                return {
+                    ...TestClone._toObject(message, options),
+                    __type: "TestClone",
+                };
+            };
+
+            /**
              * Converts this TestClone to JSON.
              * @function toJSON
              * @memberof jspb.test.TestClone
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestClone.prototype.toJSON = function toJSON() {
+            TestClone.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -4537,12 +5386,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ICloneExtension=} [properties] Properties to set
              */
+
             function CloneExtension(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            CloneExtension.type = 'CloneExtension';
+            CloneExtension.prototype.type = 'CloneExtension';
 
             /**
              * CloneExtension ext.
@@ -4563,6 +5413,37 @@ $root.jspb = (function() {
             CloneExtension.create = function create(properties) {
                 return new CloneExtension(properties);
             };
+
+            var fieldNameMap = {
+                2: 'ext'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.CloneExtension
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} CloneExtension field name
+             */
+            CloneExtension.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.CloneExtension
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} CloneExtension field name
+             */
+            CloneExtension.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            CloneExtension.prototype.fieldByNumber = CloneExtension.fieldByNumber;
 
             /**
              * Encodes the specified CloneExtension message. Does not implicitly {@link jspb.test.CloneExtension.verify|verify} messages.
@@ -4675,14 +5556,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a CloneExtension message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.CloneExtension
              * @static
              * @param {jspb.test.CloneExtension} message CloneExtension
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            CloneExtension.toObject = function toObject(message, options) {
+            CloneExtension._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -4694,13 +5575,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a CloneExtension message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.CloneExtension
+             * @static
+             * @param {jspb.test.CloneExtension} message CloneExtension
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CloneExtension.toObject = function (message, options) {
+                return {
+                    ...CloneExtension._toObject(message, options),
+                    __type: "CloneExtension",
+                };
+            };
+
+            /**
              * Converts this CloneExtension to JSON.
              * @function toJSON
              * @memberof jspb.test.CloneExtension
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            CloneExtension.prototype.toJSON = function toJSON() {
+            CloneExtension.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -4740,13 +5637,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestGroup=} [properties] Properties to set
              */
+
             function TestGroup(properties) {
-                this.repeatedGroup = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestGroup.type = 'TestGroup';
+            TestGroup.prototype.type = 'TestGroup';
 
             /**
              * TestGroup repeatedGroup.
@@ -4807,6 +5704,42 @@ $root.jspb = (function() {
             TestGroup.create = function create(properties) {
                 return new TestGroup(properties);
             };
+
+            var fieldNameMap = {
+                1: 'repeatedGroup',
+                2: 'requiredGroup',
+                3: 'optionalGroup',
+                4: 'id',
+                5: 'requiredSimple',
+                6: 'optionalSimple'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestGroup
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestGroup field name
+             */
+            TestGroup.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestGroup
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestGroup field name
+             */
+            TestGroup.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestGroup.prototype.fieldByNumber = TestGroup.fieldByNumber;
 
             /**
              * Encodes the specified TestGroup message. Does not implicitly {@link jspb.test.TestGroup.verify|verify} messages.
@@ -5008,14 +5941,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestGroup message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.TestGroup
              * @static
              * @param {jspb.test.TestGroup} message TestGroup
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestGroup.toObject = function toObject(message, options) {
+            TestGroup._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -5047,13 +5980,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a TestGroup message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.TestGroup
+             * @static
+             * @param {jspb.test.TestGroup} message TestGroup
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestGroup.toObject = function (message, options) {
+                return {
+                    ...TestGroup._toObject(message, options),
+                    __type: "TestGroup",
+                };
+            };
+
+            /**
              * Converts this TestGroup to JSON.
              * @function toJSON
              * @memberof jspb.test.TestGroup
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestGroup.prototype.toJSON = function toJSON() {
+            TestGroup.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -5086,13 +6035,13 @@ $root.jspb = (function() {
                  * @constructor
                  * @param {jspb.test.TestGroup.IRepeatedGroup=} [properties] Properties to set
                  */
+
                 function RepeatedGroup(properties) {
-                    this.someBool = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                RepeatedGroup.type = 'RepeatedGroup';
+                RepeatedGroup.prototype.type = 'RepeatedGroup';
 
                 /**
                  * RepeatedGroup id.
@@ -5121,6 +6070,38 @@ $root.jspb = (function() {
                 RepeatedGroup.create = function create(properties) {
                     return new RepeatedGroup(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'id',
+                    2: 'someBool'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof jspb.test.TestGroup.RepeatedGroup
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} RepeatedGroup field name
+                 */
+                RepeatedGroup.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof jspb.test.TestGroup.RepeatedGroup
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} RepeatedGroup field name
+                 */
+                RepeatedGroup.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                RepeatedGroup.prototype.fieldByNumber = RepeatedGroup.fieldByNumber;
 
                 /**
                  * Encodes the specified RepeatedGroup message. Does not implicitly {@link jspb.test.TestGroup.RepeatedGroup.verify|verify} messages.
@@ -5262,14 +6243,14 @@ $root.jspb = (function() {
 
                 /**
                  * Creates a plain object from a RepeatedGroup message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof jspb.test.TestGroup.RepeatedGroup
                  * @static
                  * @param {jspb.test.TestGroup.RepeatedGroup} message RepeatedGroup
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                RepeatedGroup.toObject = function toObject(message, options) {
+                RepeatedGroup._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -5288,13 +6269,29 @@ $root.jspb = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a RepeatedGroup message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof jspb.test.TestGroup.RepeatedGroup
+                 * @static
+                 * @param {jspb.test.TestGroup.RepeatedGroup} message RepeatedGroup
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                RepeatedGroup.toObject = function (message, options) {
+                    return {
+                        ...RepeatedGroup._toObject(message, options),
+                        __type: "RepeatedGroup",
+                    };
+                };
+
+                /**
                  * Converts this RepeatedGroup to JSON.
                  * @function toJSON
                  * @memberof jspb.test.TestGroup.RepeatedGroup
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                RepeatedGroup.prototype.toJSON = function toJSON() {
+                RepeatedGroup.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -5329,12 +6326,13 @@ $root.jspb = (function() {
                  * @constructor
                  * @param {jspb.test.TestGroup.IRequiredGroup=} [properties] Properties to set
                  */
+
                 function RequiredGroup(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                RequiredGroup.type = 'RequiredGroup';
+                RequiredGroup.prototype.type = 'RequiredGroup';
 
                 /**
                  * RequiredGroup id.
@@ -5355,6 +6353,37 @@ $root.jspb = (function() {
                 RequiredGroup.create = function create(properties) {
                     return new RequiredGroup(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'id'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof jspb.test.TestGroup.RequiredGroup
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} RequiredGroup field name
+                 */
+                RequiredGroup.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof jspb.test.TestGroup.RequiredGroup
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} RequiredGroup field name
+                 */
+                RequiredGroup.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                RequiredGroup.prototype.fieldByNumber = RequiredGroup.fieldByNumber;
 
                 /**
                  * Encodes the specified RequiredGroup message. Does not implicitly {@link jspb.test.TestGroup.RequiredGroup.verify|verify} messages.
@@ -5469,14 +6498,14 @@ $root.jspb = (function() {
 
                 /**
                  * Creates a plain object from a RequiredGroup message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof jspb.test.TestGroup.RequiredGroup
                  * @static
                  * @param {jspb.test.TestGroup.RequiredGroup} message RequiredGroup
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                RequiredGroup.toObject = function toObject(message, options) {
+                RequiredGroup._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -5488,13 +6517,29 @@ $root.jspb = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a RequiredGroup message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof jspb.test.TestGroup.RequiredGroup
+                 * @static
+                 * @param {jspb.test.TestGroup.RequiredGroup} message RequiredGroup
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                RequiredGroup.toObject = function (message, options) {
+                    return {
+                        ...RequiredGroup._toObject(message, options),
+                        __type: "RequiredGroup",
+                    };
+                };
+
+                /**
                  * Converts this RequiredGroup to JSON.
                  * @function toJSON
                  * @memberof jspb.test.TestGroup.RequiredGroup
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                RequiredGroup.prototype.toJSON = function toJSON() {
+                RequiredGroup.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -5529,12 +6574,13 @@ $root.jspb = (function() {
                  * @constructor
                  * @param {jspb.test.TestGroup.IOptionalGroup=} [properties] Properties to set
                  */
+
                 function OptionalGroup(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                OptionalGroup.type = 'OptionalGroup';
+                OptionalGroup.prototype.type = 'OptionalGroup';
 
                 /**
                  * OptionalGroup id.
@@ -5555,6 +6601,37 @@ $root.jspb = (function() {
                 OptionalGroup.create = function create(properties) {
                     return new OptionalGroup(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'id'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof jspb.test.TestGroup.OptionalGroup
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} OptionalGroup field name
+                 */
+                OptionalGroup.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof jspb.test.TestGroup.OptionalGroup
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} OptionalGroup field name
+                 */
+                OptionalGroup.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                OptionalGroup.prototype.fieldByNumber = OptionalGroup.fieldByNumber;
 
                 /**
                  * Encodes the specified OptionalGroup message. Does not implicitly {@link jspb.test.TestGroup.OptionalGroup.verify|verify} messages.
@@ -5669,14 +6746,14 @@ $root.jspb = (function() {
 
                 /**
                  * Creates a plain object from an OptionalGroup message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof jspb.test.TestGroup.OptionalGroup
                  * @static
                  * @param {jspb.test.TestGroup.OptionalGroup} message OptionalGroup
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                OptionalGroup.toObject = function toObject(message, options) {
+                OptionalGroup._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -5688,13 +6765,29 @@ $root.jspb = (function() {
                 };
 
                 /**
+                 * Creates a plain object from an OptionalGroup message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof jspb.test.TestGroup.OptionalGroup
+                 * @static
+                 * @param {jspb.test.TestGroup.OptionalGroup} message OptionalGroup
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OptionalGroup.toObject = function (message, options) {
+                    return {
+                        ...OptionalGroup._toObject(message, options),
+                        __type: "OptionalGroup",
+                    };
+                };
+
+                /**
                  * Converts this OptionalGroup to JSON.
                  * @function toJSON
                  * @memberof jspb.test.TestGroup.OptionalGroup
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                OptionalGroup.prototype.toJSON = function toJSON() {
+                OptionalGroup.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -5732,12 +6825,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestGroup1=} [properties] Properties to set
              */
+
             function TestGroup1(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestGroup1.type = 'TestGroup1';
+            TestGroup1.prototype.type = 'TestGroup1';
 
             /**
              * TestGroup1 group.
@@ -5758,6 +6852,37 @@ $root.jspb = (function() {
             TestGroup1.create = function create(properties) {
                 return new TestGroup1(properties);
             };
+
+            var fieldNameMap = {
+                1: 'group'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestGroup1
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestGroup1 field name
+             */
+            TestGroup1.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestGroup1
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestGroup1 field name
+             */
+            TestGroup1.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestGroup1.prototype.fieldByNumber = TestGroup1.fieldByNumber;
 
             /**
              * Encodes the specified TestGroup1 message. Does not implicitly {@link jspb.test.TestGroup1.verify|verify} messages.
@@ -5875,14 +7000,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestGroup1 message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.TestGroup1
              * @static
              * @param {jspb.test.TestGroup1} message TestGroup1
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestGroup1.toObject = function toObject(message, options) {
+            TestGroup1._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -5894,13 +7019,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a TestGroup1 message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.TestGroup1
+             * @static
+             * @param {jspb.test.TestGroup1} message TestGroup1
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestGroup1.toObject = function (message, options) {
+                return {
+                    ...TestGroup1._toObject(message, options),
+                    __type: "TestGroup1",
+                };
+            };
+
+            /**
              * Converts this TestGroup1 to JSON.
              * @function toJSON
              * @memberof jspb.test.TestGroup1
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestGroup1.prototype.toJSON = function toJSON() {
+            TestGroup1.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -5936,12 +7077,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestReservedNames=} [properties] Properties to set
              */
+
             function TestReservedNames(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestReservedNames.type = 'TestReservedNames';
+            TestReservedNames.prototype.type = 'TestReservedNames';
 
             /**
              * TestReservedNames extension.
@@ -5970,6 +7112,38 @@ $root.jspb = (function() {
             TestReservedNames.create = function create(properties) {
                 return new TestReservedNames(properties);
             };
+
+            var fieldNameMap = {
+                1: 'extension',
+                10: '.jspb.test.TestReservedNamesExtension.foo'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestReservedNames
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestReservedNames field name
+             */
+            TestReservedNames.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestReservedNames
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestReservedNames field name
+             */
+            TestReservedNames.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestReservedNames.prototype.fieldByNumber = TestReservedNames.fieldByNumber;
 
             /**
              * Encodes the specified TestReservedNames message. Does not implicitly {@link jspb.test.TestReservedNames.verify|verify} messages.
@@ -6092,14 +7266,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestReservedNames message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.TestReservedNames
              * @static
              * @param {jspb.test.TestReservedNames} message TestReservedNames
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestReservedNames.toObject = function toObject(message, options) {
+            TestReservedNames._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -6115,13 +7289,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a TestReservedNames message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.TestReservedNames
+             * @static
+             * @param {jspb.test.TestReservedNames} message TestReservedNames
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestReservedNames.toObject = function (message, options) {
+                return {
+                    ...TestReservedNames._toObject(message, options),
+                    __type: "TestReservedNames",
+                };
+            };
+
+            /**
              * Converts this TestReservedNames to JSON.
              * @function toJSON
              * @memberof jspb.test.TestReservedNames
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestReservedNames.prototype.toJSON = function toJSON() {
+            TestReservedNames.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -6155,12 +7345,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestReservedNamesExtension=} [properties] Properties to set
              */
+
             function TestReservedNamesExtension(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestReservedNamesExtension.type = 'TestReservedNamesExtension';
+            TestReservedNamesExtension.prototype.type = 'TestReservedNamesExtension';
 
             /**
              * Creates a new TestReservedNamesExtension instance using the specified properties.
@@ -6173,6 +7364,36 @@ $root.jspb = (function() {
             TestReservedNamesExtension.create = function create(properties) {
                 return new TestReservedNamesExtension(properties);
             };
+
+            var fieldNameMap = {
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestReservedNamesExtension
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestReservedNamesExtension field name
+             */
+            TestReservedNamesExtension.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestReservedNamesExtension
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestReservedNamesExtension field name
+             */
+            TestReservedNamesExtension.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestReservedNamesExtension.prototype.fieldByNumber = TestReservedNamesExtension.fieldByNumber;
 
             /**
              * Encodes the specified TestReservedNamesExtension message. Does not implicitly {@link jspb.test.TestReservedNamesExtension.verify|verify} messages.
@@ -6274,6 +7495,19 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestReservedNamesExtension message. Also converts values to other types if specified.
+             * @function _toObject
+             * @memberof jspb.test.TestReservedNamesExtension
+             * @static
+             * @param {jspb.test.TestReservedNamesExtension} message TestReservedNamesExtension
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestReservedNamesExtension._toObject = function _toObject() {
+                return {};
+            };
+
+            /**
+             * Creates a plain object from a TestReservedNamesExtension message. Also converts values to other types if specified.
              * @function toObject
              * @memberof jspb.test.TestReservedNamesExtension
              * @static
@@ -6281,8 +7515,11 @@ $root.jspb = (function() {
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestReservedNamesExtension.toObject = function toObject() {
-                return {};
+            TestReservedNamesExtension.toObject = function (message, options) {
+                return {
+                    ...TestReservedNamesExtension._toObject(message, options),
+                    __type: "TestReservedNamesExtension",
+                };
             };
 
             /**
@@ -6292,7 +7529,7 @@ $root.jspb = (function() {
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestReservedNamesExtension.prototype.toJSON = function toJSON() {
+            TestReservedNamesExtension.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -6336,29 +7573,29 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestMessageWithOneof=} [properties] Properties to set
              */
+
             function TestMessageWithOneof(properties) {
-                this.repeatedField = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestMessageWithOneof.type = 'TestMessageWithOneof';
+            TestMessageWithOneof.prototype.type = 'TestMessageWithOneof';
 
             /**
              * TestMessageWithOneof pone.
-             * @member {string} pone
+             * @member {string|null|undefined} pone
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              */
-            TestMessageWithOneof.prototype.pone = "";
+            TestMessageWithOneof.prototype.pone = null;
 
             /**
              * TestMessageWithOneof pthree.
-             * @member {string} pthree
+             * @member {string|null|undefined} pthree
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              */
-            TestMessageWithOneof.prototype.pthree = "";
+            TestMessageWithOneof.prototype.pthree = null;
 
             /**
              * TestMessageWithOneof rone.
@@ -6370,11 +7607,11 @@ $root.jspb = (function() {
 
             /**
              * TestMessageWithOneof rtwo.
-             * @member {string} rtwo
+             * @member {string|null|undefined} rtwo
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              */
-            TestMessageWithOneof.prototype.rtwo = "";
+            TestMessageWithOneof.prototype.rtwo = null;
 
             /**
              * TestMessageWithOneof normalField.
@@ -6394,35 +7631,35 @@ $root.jspb = (function() {
 
             /**
              * TestMessageWithOneof aone.
-             * @member {number} aone
+             * @member {number|null|undefined} aone
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              */
-            TestMessageWithOneof.prototype.aone = 1234;
+            TestMessageWithOneof.prototype.aone = null;
 
             /**
              * TestMessageWithOneof atwo.
-             * @member {number} atwo
+             * @member {number|null|undefined} atwo
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              */
-            TestMessageWithOneof.prototype.atwo = 0;
+            TestMessageWithOneof.prototype.atwo = null;
 
             /**
              * TestMessageWithOneof bone.
-             * @member {number} bone
+             * @member {number|null|undefined} bone
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              */
-            TestMessageWithOneof.prototype.bone = 0;
+            TestMessageWithOneof.prototype.bone = null;
 
             /**
              * TestMessageWithOneof btwo.
-             * @member {number} btwo
+             * @member {number|null|undefined} btwo
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              */
-            TestMessageWithOneof.prototype.btwo = 1234;
+            TestMessageWithOneof.prototype.btwo = null;
 
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
@@ -6482,6 +7719,46 @@ $root.jspb = (function() {
             TestMessageWithOneof.create = function create(properties) {
                 return new TestMessageWithOneof(properties);
             };
+
+            var fieldNameMap = {
+                3: 'pone',
+                5: 'pthree',
+                6: 'rone',
+                7: 'rtwo',
+                8: 'normalField',
+                9: 'repeatedField',
+                10: 'aone',
+                11: 'atwo',
+                12: 'bone',
+                13: 'btwo'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestMessageWithOneof
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestMessageWithOneof field name
+             */
+            TestMessageWithOneof.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestMessageWithOneof
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestMessageWithOneof field name
+             */
+            TestMessageWithOneof.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestMessageWithOneof.prototype.fieldByNumber = TestMessageWithOneof.fieldByNumber;
 
             /**
              * Encodes the specified TestMessageWithOneof message. Does not implicitly {@link jspb.test.TestMessageWithOneof.verify|verify} messages.
@@ -6727,14 +8004,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestMessageWithOneof message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.TestMessageWithOneof
              * @static
              * @param {jspb.test.TestMessageWithOneof} message TestMessageWithOneof
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestMessageWithOneof.toObject = function toObject(message, options) {
+            TestMessageWithOneof._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -6793,13 +8070,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a TestMessageWithOneof message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.TestMessageWithOneof
+             * @static
+             * @param {jspb.test.TestMessageWithOneof} message TestMessageWithOneof
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestMessageWithOneof.toObject = function (message, options) {
+                return {
+                    ...TestMessageWithOneof._toObject(message, options),
+                    __type: "TestMessageWithOneof",
+                };
+            };
+
+            /**
              * Converts this TestMessageWithOneof to JSON.
              * @function toJSON
              * @memberof jspb.test.TestMessageWithOneof
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestMessageWithOneof.prototype.toJSON = function toJSON() {
+            TestMessageWithOneof.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -6835,12 +8128,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestEndsWithBytes=} [properties] Properties to set
              */
+
             function TestEndsWithBytes(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestEndsWithBytes.type = 'TestEndsWithBytes';
+            TestEndsWithBytes.prototype.type = 'TestEndsWithBytes';
 
             /**
              * TestEndsWithBytes value.
@@ -6869,6 +8163,38 @@ $root.jspb = (function() {
             TestEndsWithBytes.create = function create(properties) {
                 return new TestEndsWithBytes(properties);
             };
+
+            var fieldNameMap = {
+                1: 'value',
+                2: 'data'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestEndsWithBytes
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestEndsWithBytes field name
+             */
+            TestEndsWithBytes.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestEndsWithBytes
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestEndsWithBytes field name
+             */
+            TestEndsWithBytes.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestEndsWithBytes.prototype.fieldByNumber = TestEndsWithBytes.fieldByNumber;
 
             /**
              * Encodes the specified TestEndsWithBytes message. Does not implicitly {@link jspb.test.TestEndsWithBytes.verify|verify} messages.
@@ -6994,14 +8320,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestEndsWithBytes message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.TestEndsWithBytes
              * @static
              * @param {jspb.test.TestEndsWithBytes} message TestEndsWithBytes
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestEndsWithBytes.toObject = function toObject(message, options) {
+            TestEndsWithBytes._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -7023,13 +8349,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a TestEndsWithBytes message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.TestEndsWithBytes
+             * @static
+             * @param {jspb.test.TestEndsWithBytes} message TestEndsWithBytes
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestEndsWithBytes.toObject = function (message, options) {
+                return {
+                    ...TestEndsWithBytes._toObject(message, options),
+                    __type: "TestEndsWithBytes",
+                };
+            };
+
+            /**
              * Converts this TestEndsWithBytes to JSON.
              * @function toJSON
              * @memberof jspb.test.TestEndsWithBytes
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestEndsWithBytes.prototype.toJSON = function toJSON() {
+            TestEndsWithBytes.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -7075,23 +8417,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.ITestMapFieldsNoBinary=} [properties] Properties to set
              */
+
             function TestMapFieldsNoBinary(properties) {
-                this.mapStringString = {};
-                this.mapStringInt32 = {};
-                this.mapStringInt64 = {};
-                this.mapStringBool = {};
-                this.mapStringDouble = {};
-                this.mapStringEnum = {};
-                this.mapStringMsg = {};
-                this.mapInt32String = {};
-                this.mapInt64String = {};
-                this.mapBoolString = {};
-                this.mapStringTestmapfields = {};
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            TestMapFieldsNoBinary.type = 'TestMapFieldsNoBinary';
+            TestMapFieldsNoBinary.prototype.type = 'TestMapFieldsNoBinary';
 
             /**
              * TestMapFieldsNoBinary mapStringString.
@@ -7200,6 +8532,48 @@ $root.jspb = (function() {
             TestMapFieldsNoBinary.create = function create(properties) {
                 return new TestMapFieldsNoBinary(properties);
             };
+
+            var fieldNameMap = {
+                1: 'mapStringString',
+                2: 'mapStringInt32',
+                3: 'mapStringInt64',
+                4: 'mapStringBool',
+                5: 'mapStringDouble',
+                6: 'mapStringEnum',
+                7: 'mapStringMsg',
+                8: 'mapInt32String',
+                9: 'mapInt64String',
+                10: 'mapBoolString',
+                11: 'testMapFields',
+                12: 'mapStringTestmapfields'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.TestMapFieldsNoBinary
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} TestMapFieldsNoBinary field name
+             */
+            TestMapFieldsNoBinary.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.TestMapFieldsNoBinary
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} TestMapFieldsNoBinary field name
+             */
+            TestMapFieldsNoBinary.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            TestMapFieldsNoBinary.prototype.fieldByNumber = TestMapFieldsNoBinary.fieldByNumber;
 
             /**
              * Encodes the specified TestMapFieldsNoBinary message. Does not implicitly {@link jspb.test.TestMapFieldsNoBinary.verify|verify} messages.
@@ -7806,14 +9180,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a TestMapFieldsNoBinary message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.TestMapFieldsNoBinary
              * @static
              * @param {jspb.test.TestMapFieldsNoBinary} message TestMapFieldsNoBinary
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            TestMapFieldsNoBinary.toObject = function toObject(message, options) {
+            TestMapFieldsNoBinary._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -7897,13 +9271,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a TestMapFieldsNoBinary message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.TestMapFieldsNoBinary
+             * @static
+             * @param {jspb.test.TestMapFieldsNoBinary} message TestMapFieldsNoBinary
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TestMapFieldsNoBinary.toObject = function (message, options) {
+                return {
+                    ...TestMapFieldsNoBinary._toObject(message, options),
+                    __type: "TestMapFieldsNoBinary",
+                };
+            };
+
+            /**
              * Converts this TestMapFieldsNoBinary to JSON.
              * @function toJSON
              * @memberof jspb.test.TestMapFieldsNoBinary
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            TestMapFieldsNoBinary.prototype.toJSON = function toJSON() {
+            TestMapFieldsNoBinary.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -7954,12 +9344,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IMapValueMessageNoBinary=} [properties] Properties to set
              */
+
             function MapValueMessageNoBinary(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            MapValueMessageNoBinary.type = 'MapValueMessageNoBinary';
+            MapValueMessageNoBinary.prototype.type = 'MapValueMessageNoBinary';
 
             /**
              * MapValueMessageNoBinary foo.
@@ -7980,6 +9371,37 @@ $root.jspb = (function() {
             MapValueMessageNoBinary.create = function create(properties) {
                 return new MapValueMessageNoBinary(properties);
             };
+
+            var fieldNameMap = {
+                1: 'foo'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.MapValueMessageNoBinary
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} MapValueMessageNoBinary field name
+             */
+            MapValueMessageNoBinary.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.MapValueMessageNoBinary
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} MapValueMessageNoBinary field name
+             */
+            MapValueMessageNoBinary.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            MapValueMessageNoBinary.prototype.fieldByNumber = MapValueMessageNoBinary.fieldByNumber;
 
             /**
              * Encodes the specified MapValueMessageNoBinary message. Does not implicitly {@link jspb.test.MapValueMessageNoBinary.verify|verify} messages.
@@ -8092,14 +9514,14 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a MapValueMessageNoBinary message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof jspb.test.MapValueMessageNoBinary
              * @static
              * @param {jspb.test.MapValueMessageNoBinary} message MapValueMessageNoBinary
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            MapValueMessageNoBinary.toObject = function toObject(message, options) {
+            MapValueMessageNoBinary._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -8111,13 +9533,29 @@ $root.jspb = (function() {
             };
 
             /**
+             * Creates a plain object from a MapValueMessageNoBinary message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof jspb.test.MapValueMessageNoBinary
+             * @static
+             * @param {jspb.test.MapValueMessageNoBinary} message MapValueMessageNoBinary
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MapValueMessageNoBinary.toObject = function (message, options) {
+                return {
+                    ...MapValueMessageNoBinary._toObject(message, options),
+                    __type: "MapValueMessageNoBinary",
+                };
+            };
+
+            /**
              * Converts this MapValueMessageNoBinary to JSON.
              * @function toJSON
              * @memberof jspb.test.MapValueMessageNoBinary
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            MapValueMessageNoBinary.prototype.toJSON = function toJSON() {
+            MapValueMessageNoBinary.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -8151,12 +9589,13 @@ $root.jspb = (function() {
              * @constructor
              * @param {jspb.test.IDeeply=} [properties] Properties to set
              */
+
             function Deeply(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Deeply.type = 'Deeply';
+            Deeply.prototype.type = 'Deeply';
 
             /**
              * Creates a new Deeply instance using the specified properties.
@@ -8169,6 +9608,36 @@ $root.jspb = (function() {
             Deeply.create = function create(properties) {
                 return new Deeply(properties);
             };
+
+            var fieldNameMap = {
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof jspb.test.Deeply
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Deeply field name
+             */
+            Deeply.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof jspb.test.Deeply
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Deeply field name
+             */
+            Deeply.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Deeply.prototype.fieldByNumber = Deeply.fieldByNumber;
 
             /**
              * Encodes the specified Deeply message. Does not implicitly {@link jspb.test.Deeply.verify|verify} messages.
@@ -8270,6 +9739,19 @@ $root.jspb = (function() {
 
             /**
              * Creates a plain object from a Deeply message. Also converts values to other types if specified.
+             * @function _toObject
+             * @memberof jspb.test.Deeply
+             * @static
+             * @param {jspb.test.Deeply} message Deeply
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Deeply._toObject = function _toObject() {
+                return {};
+            };
+
+            /**
+             * Creates a plain object from a Deeply message. Also converts values to other types if specified.
              * @function toObject
              * @memberof jspb.test.Deeply
              * @static
@@ -8277,8 +9759,11 @@ $root.jspb = (function() {
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Deeply.toObject = function toObject() {
-                return {};
+            Deeply.toObject = function (message, options) {
+                return {
+                    ...Deeply._toObject(message, options),
+                    __type: "Deeply",
+                };
             };
 
             /**
@@ -8288,7 +9773,7 @@ $root.jspb = (function() {
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Deeply.prototype.toJSON = function toJSON() {
+            Deeply.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -8319,12 +9804,13 @@ $root.jspb = (function() {
                  * @constructor
                  * @param {jspb.test.Deeply.INested=} [properties] Properties to set
                  */
+
                 function Nested(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                Nested.type = 'Nested';
+                Nested.prototype.type = 'Nested';
 
                 /**
                  * Creates a new Nested instance using the specified properties.
@@ -8337,6 +9823,36 @@ $root.jspb = (function() {
                 Nested.create = function create(properties) {
                     return new Nested(properties);
                 };
+
+                var fieldNameMap = {
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof jspb.test.Deeply.Nested
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} Nested field name
+                 */
+                Nested.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof jspb.test.Deeply.Nested
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} Nested field name
+                 */
+                Nested.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                Nested.prototype.fieldByNumber = Nested.fieldByNumber;
 
                 /**
                  * Encodes the specified Nested message. Does not implicitly {@link jspb.test.Deeply.Nested.verify|verify} messages.
@@ -8438,6 +9954,19 @@ $root.jspb = (function() {
 
                 /**
                  * Creates a plain object from a Nested message. Also converts values to other types if specified.
+                 * @function _toObject
+                 * @memberof jspb.test.Deeply.Nested
+                 * @static
+                 * @param {jspb.test.Deeply.Nested} message Nested
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Nested._toObject = function _toObject() {
+                    return {};
+                };
+
+                /**
+                 * Creates a plain object from a Nested message. Also converts values to other types if specified.
                  * @function toObject
                  * @memberof jspb.test.Deeply.Nested
                  * @static
@@ -8445,8 +9974,11 @@ $root.jspb = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Nested.toObject = function toObject() {
-                    return {};
+                Nested.toObject = function (message, options) {
+                    return {
+                        ...Nested._toObject(message, options),
+                        __type: "Nested",
+                    };
                 };
 
                 /**
@@ -8456,7 +9988,7 @@ $root.jspb = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Nested.prototype.toJSON = function toJSON() {
+                Nested.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -8488,12 +10020,13 @@ $root.jspb = (function() {
                      * @constructor
                      * @param {jspb.test.Deeply.Nested.IMessage=} [properties] Properties to set
                      */
+
                     function Message(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
+                        setProperties(this, properties);
                     }
+
+                    Message.type = 'Message';
+                    Message.prototype.type = 'Message';
 
                     /**
                      * Message count.
@@ -8514,6 +10047,37 @@ $root.jspb = (function() {
                     Message.create = function create(properties) {
                         return new Message(properties);
                     };
+
+                    var fieldNameMap = {
+                        1: 'count'
+                    };
+
+                    /**
+                     * Get a field number from its name
+                     * @function fieldNumberByName
+                     * @memberof jspb.test.Deeply.Nested.Message
+                     * @static
+                     * @param {string} Name of field to convert
+                     * @returns {Number} Message field name
+                     */
+                    Message.fieldNumberByName = function fieldNumberByName(name) {
+                        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                        return Number(num);
+                    };
+
+                    /**
+                     * Get a field name from it's numeric id
+                     * @function fieldByNumber
+                     * @memberof jspb.test.Deeply.Nested.Message
+                     * @static
+                     * @param {number} Number of field to convert
+                     * @returns {String} Message field name
+                     */
+                    Message.fieldByNumber = function fieldByNumber(num) {
+                        return fieldNameMap[num];
+                    };
+
+                    Message.prototype.fieldByNumber = Message.fieldByNumber;
 
                     /**
                      * Encodes the specified Message message. Does not implicitly {@link jspb.test.Deeply.Nested.Message.verify|verify} messages.
@@ -8626,14 +10190,14 @@ $root.jspb = (function() {
 
                     /**
                      * Creates a plain object from a Message message. Also converts values to other types if specified.
-                     * @function toObject
+                     * @function _toObject
                      * @memberof jspb.test.Deeply.Nested.Message
                      * @static
                      * @param {jspb.test.Deeply.Nested.Message} message Message
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Message.toObject = function toObject(message, options) {
+                    Message._toObject = function _toObject(message, options) {
                         if (!options)
                             options = {};
                         var object = {};
@@ -8645,13 +10209,29 @@ $root.jspb = (function() {
                     };
 
                     /**
+                     * Creates a plain object from a Message message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof jspb.test.Deeply.Nested.Message
+                     * @static
+                     * @param {jspb.test.Deeply.Nested.Message} message Message
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Message.toObject = function (message, options) {
+                        return {
+                            ...Message._toObject(message, options),
+                            __type: "Message",
+                        };
+                    };
+
+                    /**
                      * Converts this Message to JSON.
                      * @function toJSON
                      * @memberof jspb.test.Deeply.Nested.Message
                      * @instance
                      * @returns {Object.<string,*>} JSON object
                      */
-                    Message.prototype.toJSON = function toJSON() {
+                    Message.prototype.toObject = function toObject() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
 
@@ -8716,13 +10296,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IFileDescriptorSet=} [properties] Properties to set
              */
+
             function FileDescriptorSet(properties) {
-                this.file = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            FileDescriptorSet.type = 'FileDescriptorSet';
+            FileDescriptorSet.prototype.type = 'FileDescriptorSet';
 
             /**
              * FileDescriptorSet file.
@@ -8743,6 +10323,37 @@ $root.google = (function() {
             FileDescriptorSet.create = function create(properties) {
                 return new FileDescriptorSet(properties);
             };
+
+            var fieldNameMap = {
+                1: 'file'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.FileDescriptorSet
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} FileDescriptorSet field name
+             */
+            FileDescriptorSet.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.FileDescriptorSet
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} FileDescriptorSet field name
+             */
+            FileDescriptorSet.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            FileDescriptorSet.prototype.fieldByNumber = FileDescriptorSet.fieldByNumber;
 
             /**
              * Encodes the specified FileDescriptorSet message. Does not implicitly {@link google.protobuf.FileDescriptorSet.verify|verify} messages.
@@ -8872,14 +10483,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a FileDescriptorSet message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.FileDescriptorSet
              * @static
              * @param {google.protobuf.FileDescriptorSet} message FileDescriptorSet
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            FileDescriptorSet.toObject = function toObject(message, options) {
+            FileDescriptorSet._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -8894,13 +10505,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a FileDescriptorSet message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.FileDescriptorSet
+             * @static
+             * @param {google.protobuf.FileDescriptorSet} message FileDescriptorSet
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FileDescriptorSet.toObject = function (message, options) {
+                return {
+                    ...FileDescriptorSet._toObject(message, options),
+                    __type: "FileDescriptorSet",
+                };
+            };
+
+            /**
              * Converts this FileDescriptorSet to JSON.
              * @function toJSON
              * @memberof google.protobuf.FileDescriptorSet
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            FileDescriptorSet.prototype.toJSON = function toJSON() {
+            FileDescriptorSet.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -8946,19 +10573,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IFileDescriptorProto=} [properties] Properties to set
              */
+
             function FileDescriptorProto(properties) {
-                this.dependency = [];
-                this.publicDependency = [];
-                this.weakDependency = [];
-                this.messageType = [];
-                this.enumType = [];
-                this.service = [];
-                this.extension = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            FileDescriptorProto.type = 'FileDescriptorProto';
+            FileDescriptorProto.prototype.type = 'FileDescriptorProto';
 
             /**
              * FileDescriptorProto name.
@@ -9067,6 +10688,48 @@ $root.google = (function() {
             FileDescriptorProto.create = function create(properties) {
                 return new FileDescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                2: 'package',
+                3: 'dependency',
+                10: 'publicDependency',
+                11: 'weakDependency',
+                4: 'messageType',
+                5: 'enumType',
+                6: 'service',
+                7: 'extension',
+                8: 'options',
+                9: 'sourceCodeInfo',
+                12: 'syntax'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.FileDescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} FileDescriptorProto field name
+             */
+            FileDescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.FileDescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} FileDescriptorProto field name
+             */
+            FileDescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            FileDescriptorProto.prototype.fieldByNumber = FileDescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified FileDescriptorProto message. Does not implicitly {@link google.protobuf.FileDescriptorProto.verify|verify} messages.
@@ -9413,14 +11076,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a FileDescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.FileDescriptorProto
              * @static
              * @param {google.protobuf.FileDescriptorProto} message FileDescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            FileDescriptorProto.toObject = function toObject(message, options) {
+            FileDescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -9489,13 +11152,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a FileDescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.FileDescriptorProto
+             * @static
+             * @param {google.protobuf.FileDescriptorProto} message FileDescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FileDescriptorProto.toObject = function (message, options) {
+                return {
+                    ...FileDescriptorProto._toObject(message, options),
+                    __type: "FileDescriptorProto",
+                };
+            };
+
+            /**
              * Converts this FileDescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.FileDescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            FileDescriptorProto.prototype.toJSON = function toJSON() {
+            FileDescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -9539,20 +11218,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IDescriptorProto=} [properties] Properties to set
              */
+
             function DescriptorProto(properties) {
-                this.field = [];
-                this.extension = [];
-                this.nestedType = [];
-                this.enumType = [];
-                this.extensionRange = [];
-                this.oneofDecl = [];
-                this.reservedRange = [];
-                this.reservedName = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            DescriptorProto.type = 'DescriptorProto';
+            DescriptorProto.prototype.type = 'DescriptorProto';
 
             /**
              * DescriptorProto name.
@@ -9645,6 +11317,46 @@ $root.google = (function() {
             DescriptorProto.create = function create(properties) {
                 return new DescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                2: 'field',
+                6: 'extension',
+                3: 'nestedType',
+                4: 'enumType',
+                5: 'extensionRange',
+                8: 'oneofDecl',
+                7: 'options',
+                9: 'reservedRange',
+                10: 'reservedName'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.DescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} DescriptorProto field name
+             */
+            DescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.DescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} DescriptorProto field name
+             */
+            DescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            DescriptorProto.prototype.fieldByNumber = DescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified DescriptorProto message. Does not implicitly {@link google.protobuf.DescriptorProto.verify|verify} messages.
@@ -9983,14 +11695,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a DescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.DescriptorProto
              * @static
              * @param {google.protobuf.DescriptorProto} message DescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            DescriptorProto.toObject = function toObject(message, options) {
+            DescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -10056,13 +11768,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a DescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.DescriptorProto
+             * @static
+             * @param {google.protobuf.DescriptorProto} message DescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DescriptorProto.toObject = function (message, options) {
+                return {
+                    ...DescriptorProto._toObject(message, options),
+                    __type: "DescriptorProto",
+                };
+            };
+
+            /**
              * Converts this DescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.DescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            DescriptorProto.prototype.toJSON = function toJSON() {
+            DescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -10095,12 +11823,13 @@ $root.google = (function() {
                  * @constructor
                  * @param {google.protobuf.DescriptorProto.IExtensionRange=} [properties] Properties to set
                  */
+
                 function ExtensionRange(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                ExtensionRange.type = 'ExtensionRange';
+                ExtensionRange.prototype.type = 'ExtensionRange';
 
                 /**
                  * ExtensionRange start.
@@ -10129,6 +11858,38 @@ $root.google = (function() {
                 ExtensionRange.create = function create(properties) {
                     return new ExtensionRange(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'start',
+                    2: 'end'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} ExtensionRange field name
+                 */
+                ExtensionRange.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} ExtensionRange field name
+                 */
+                ExtensionRange.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                ExtensionRange.prototype.fieldByNumber = ExtensionRange.fieldByNumber;
 
                 /**
                  * Encodes the specified ExtensionRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ExtensionRange.verify|verify} messages.
@@ -10251,14 +12012,14 @@ $root.google = (function() {
 
                 /**
                  * Creates a plain object from an ExtensionRange message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof google.protobuf.DescriptorProto.ExtensionRange
                  * @static
                  * @param {google.protobuf.DescriptorProto.ExtensionRange} message ExtensionRange
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ExtensionRange.toObject = function toObject(message, options) {
+                ExtensionRange._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -10274,13 +12035,29 @@ $root.google = (function() {
                 };
 
                 /**
+                 * Creates a plain object from an ExtensionRange message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                 * @static
+                 * @param {google.protobuf.DescriptorProto.ExtensionRange} message ExtensionRange
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ExtensionRange.toObject = function (message, options) {
+                    return {
+                        ...ExtensionRange._toObject(message, options),
+                        __type: "ExtensionRange",
+                    };
+                };
+
+                /**
                  * Converts this ExtensionRange to JSON.
                  * @function toJSON
                  * @memberof google.protobuf.DescriptorProto.ExtensionRange
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                ExtensionRange.prototype.toJSON = function toJSON() {
+                ExtensionRange.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -10316,12 +12093,13 @@ $root.google = (function() {
                  * @constructor
                  * @param {google.protobuf.DescriptorProto.IReservedRange=} [properties] Properties to set
                  */
+
                 function ReservedRange(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                ReservedRange.type = 'ReservedRange';
+                ReservedRange.prototype.type = 'ReservedRange';
 
                 /**
                  * ReservedRange start.
@@ -10350,6 +12128,38 @@ $root.google = (function() {
                 ReservedRange.create = function create(properties) {
                     return new ReservedRange(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'start',
+                    2: 'end'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof google.protobuf.DescriptorProto.ReservedRange
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} ReservedRange field name
+                 */
+                ReservedRange.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof google.protobuf.DescriptorProto.ReservedRange
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} ReservedRange field name
+                 */
+                ReservedRange.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                ReservedRange.prototype.fieldByNumber = ReservedRange.fieldByNumber;
 
                 /**
                  * Encodes the specified ReservedRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
@@ -10472,14 +12282,14 @@ $root.google = (function() {
 
                 /**
                  * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof google.protobuf.DescriptorProto.ReservedRange
                  * @static
                  * @param {google.protobuf.DescriptorProto.ReservedRange} message ReservedRange
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ReservedRange.toObject = function toObject(message, options) {
+                ReservedRange._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -10495,13 +12305,29 @@ $root.google = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.DescriptorProto.ReservedRange
+                 * @static
+                 * @param {google.protobuf.DescriptorProto.ReservedRange} message ReservedRange
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ReservedRange.toObject = function (message, options) {
+                    return {
+                        ...ReservedRange._toObject(message, options),
+                        __type: "ReservedRange",
+                    };
+                };
+
+                /**
                  * Converts this ReservedRange to JSON.
                  * @function toJSON
                  * @memberof google.protobuf.DescriptorProto.ReservedRange
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                ReservedRange.prototype.toJSON = function toJSON() {
+                ReservedRange.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -10548,12 +12374,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IFieldDescriptorProto=} [properties] Properties to set
              */
+
             function FieldDescriptorProto(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            FieldDescriptorProto.type = 'FieldDescriptorProto';
+            FieldDescriptorProto.prototype.type = 'FieldDescriptorProto';
 
             /**
              * FieldDescriptorProto name.
@@ -10646,6 +12473,46 @@ $root.google = (function() {
             FieldDescriptorProto.create = function create(properties) {
                 return new FieldDescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                3: 'number',
+                4: 'label',
+                5: 'type',
+                6: 'typeName',
+                2: 'extendee',
+                7: 'defaultValue',
+                9: 'oneofIndex',
+                10: 'jsonName',
+                8: 'options'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.FieldDescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} FieldDescriptorProto field name
+             */
+            FieldDescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.FieldDescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} FieldDescriptorProto field name
+             */
+            FieldDescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            FieldDescriptorProto.prototype.fieldByNumber = FieldDescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified FieldDescriptorProto message. Does not implicitly {@link google.protobuf.FieldDescriptorProto.verify|verify} messages.
@@ -10964,14 +12831,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a FieldDescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.FieldDescriptorProto
              * @static
              * @param {google.protobuf.FieldDescriptorProto} message FieldDescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            FieldDescriptorProto.toObject = function toObject(message, options) {
+            FieldDescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -11011,13 +12878,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a FieldDescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.FieldDescriptorProto
+             * @static
+             * @param {google.protobuf.FieldDescriptorProto} message FieldDescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FieldDescriptorProto.toObject = function (message, options) {
+                return {
+                    ...FieldDescriptorProto._toObject(message, options),
+                    __type: "FieldDescriptorProto",
+                };
+            };
+
+            /**
              * Converts this FieldDescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.FieldDescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            FieldDescriptorProto.prototype.toJSON = function toJSON() {
+            FieldDescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -11115,12 +12998,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IOneofDescriptorProto=} [properties] Properties to set
              */
+
             function OneofDescriptorProto(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            OneofDescriptorProto.type = 'OneofDescriptorProto';
+            OneofDescriptorProto.prototype.type = 'OneofDescriptorProto';
 
             /**
              * OneofDescriptorProto name.
@@ -11149,6 +13033,38 @@ $root.google = (function() {
             OneofDescriptorProto.create = function create(properties) {
                 return new OneofDescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                2: 'options'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.OneofDescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} OneofDescriptorProto field name
+             */
+            OneofDescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.OneofDescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} OneofDescriptorProto field name
+             */
+            OneofDescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            OneofDescriptorProto.prototype.fieldByNumber = OneofDescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified OneofDescriptorProto message. Does not implicitly {@link google.protobuf.OneofDescriptorProto.verify|verify} messages.
@@ -11276,14 +13192,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from an OneofDescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.OneofDescriptorProto
              * @static
              * @param {google.protobuf.OneofDescriptorProto} message OneofDescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            OneofDescriptorProto.toObject = function toObject(message, options) {
+            OneofDescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -11299,13 +13215,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from an OneofDescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.OneofDescriptorProto
+             * @static
+             * @param {google.protobuf.OneofDescriptorProto} message OneofDescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            OneofDescriptorProto.toObject = function (message, options) {
+                return {
+                    ...OneofDescriptorProto._toObject(message, options),
+                    __type: "OneofDescriptorProto",
+                };
+            };
+
+            /**
              * Converts this OneofDescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.OneofDescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            OneofDescriptorProto.prototype.toJSON = function toJSON() {
+            OneofDescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -11342,13 +13274,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IEnumDescriptorProto=} [properties] Properties to set
              */
+
             function EnumDescriptorProto(properties) {
-                this.value = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            EnumDescriptorProto.type = 'EnumDescriptorProto';
+            EnumDescriptorProto.prototype.type = 'EnumDescriptorProto';
 
             /**
              * EnumDescriptorProto name.
@@ -11385,6 +13317,39 @@ $root.google = (function() {
             EnumDescriptorProto.create = function create(properties) {
                 return new EnumDescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                2: 'value',
+                3: 'options'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.EnumDescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} EnumDescriptorProto field name
+             */
+            EnumDescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.EnumDescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} EnumDescriptorProto field name
+             */
+            EnumDescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            EnumDescriptorProto.prototype.fieldByNumber = EnumDescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified EnumDescriptorProto message. Does not implicitly {@link google.protobuf.EnumDescriptorProto.verify|verify} messages.
@@ -11539,14 +13504,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from an EnumDescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.EnumDescriptorProto
              * @static
              * @param {google.protobuf.EnumDescriptorProto} message EnumDescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            EnumDescriptorProto.toObject = function toObject(message, options) {
+            EnumDescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -11569,13 +13534,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from an EnumDescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.EnumDescriptorProto
+             * @static
+             * @param {google.protobuf.EnumDescriptorProto} message EnumDescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            EnumDescriptorProto.toObject = function (message, options) {
+                return {
+                    ...EnumDescriptorProto._toObject(message, options),
+                    __type: "EnumDescriptorProto",
+                };
+            };
+
+            /**
              * Converts this EnumDescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.EnumDescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            EnumDescriptorProto.prototype.toJSON = function toJSON() {
+            EnumDescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -11612,12 +13593,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IEnumValueDescriptorProto=} [properties] Properties to set
              */
+
             function EnumValueDescriptorProto(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            EnumValueDescriptorProto.type = 'EnumValueDescriptorProto';
+            EnumValueDescriptorProto.prototype.type = 'EnumValueDescriptorProto';
 
             /**
              * EnumValueDescriptorProto name.
@@ -11654,6 +13636,39 @@ $root.google = (function() {
             EnumValueDescriptorProto.create = function create(properties) {
                 return new EnumValueDescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                2: 'number',
+                3: 'options'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.EnumValueDescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} EnumValueDescriptorProto field name
+             */
+            EnumValueDescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.EnumValueDescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} EnumValueDescriptorProto field name
+             */
+            EnumValueDescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            EnumValueDescriptorProto.prototype.fieldByNumber = EnumValueDescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified EnumValueDescriptorProto message. Does not implicitly {@link google.protobuf.EnumValueDescriptorProto.verify|verify} messages.
@@ -11791,14 +13806,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from an EnumValueDescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.EnumValueDescriptorProto
              * @static
              * @param {google.protobuf.EnumValueDescriptorProto} message EnumValueDescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            EnumValueDescriptorProto.toObject = function toObject(message, options) {
+            EnumValueDescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -11817,13 +13832,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from an EnumValueDescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.EnumValueDescriptorProto
+             * @static
+             * @param {google.protobuf.EnumValueDescriptorProto} message EnumValueDescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            EnumValueDescriptorProto.toObject = function (message, options) {
+                return {
+                    ...EnumValueDescriptorProto._toObject(message, options),
+                    __type: "EnumValueDescriptorProto",
+                };
+            };
+
+            /**
              * Converts this EnumValueDescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.EnumValueDescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
+            EnumValueDescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -11860,13 +13891,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IServiceDescriptorProto=} [properties] Properties to set
              */
+
             function ServiceDescriptorProto(properties) {
-                this.method = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            ServiceDescriptorProto.type = 'ServiceDescriptorProto';
+            ServiceDescriptorProto.prototype.type = 'ServiceDescriptorProto';
 
             /**
              * ServiceDescriptorProto name.
@@ -11903,6 +13934,39 @@ $root.google = (function() {
             ServiceDescriptorProto.create = function create(properties) {
                 return new ServiceDescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                2: 'method',
+                3: 'options'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.ServiceDescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} ServiceDescriptorProto field name
+             */
+            ServiceDescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.ServiceDescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} ServiceDescriptorProto field name
+             */
+            ServiceDescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            ServiceDescriptorProto.prototype.fieldByNumber = ServiceDescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified ServiceDescriptorProto message. Does not implicitly {@link google.protobuf.ServiceDescriptorProto.verify|verify} messages.
@@ -12057,14 +14121,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a ServiceDescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.ServiceDescriptorProto
              * @static
              * @param {google.protobuf.ServiceDescriptorProto} message ServiceDescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            ServiceDescriptorProto.toObject = function toObject(message, options) {
+            ServiceDescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -12087,13 +14151,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a ServiceDescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.ServiceDescriptorProto
+             * @static
+             * @param {google.protobuf.ServiceDescriptorProto} message ServiceDescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ServiceDescriptorProto.toObject = function (message, options) {
+                return {
+                    ...ServiceDescriptorProto._toObject(message, options),
+                    __type: "ServiceDescriptorProto",
+                };
+            };
+
+            /**
              * Converts this ServiceDescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.ServiceDescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            ServiceDescriptorProto.prototype.toJSON = function toJSON() {
+            ServiceDescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -12133,12 +14213,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IMethodDescriptorProto=} [properties] Properties to set
              */
+
             function MethodDescriptorProto(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            MethodDescriptorProto.type = 'MethodDescriptorProto';
+            MethodDescriptorProto.prototype.type = 'MethodDescriptorProto';
 
             /**
              * MethodDescriptorProto name.
@@ -12199,6 +14280,42 @@ $root.google = (function() {
             MethodDescriptorProto.create = function create(properties) {
                 return new MethodDescriptorProto(properties);
             };
+
+            var fieldNameMap = {
+                1: 'name',
+                2: 'inputType',
+                3: 'outputType',
+                4: 'options',
+                5: 'clientStreaming',
+                6: 'serverStreaming'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.MethodDescriptorProto
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} MethodDescriptorProto field name
+             */
+            MethodDescriptorProto.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.MethodDescriptorProto
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} MethodDescriptorProto field name
+             */
+            MethodDescriptorProto.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            MethodDescriptorProto.prototype.fieldByNumber = MethodDescriptorProto.fieldByNumber;
 
             /**
              * Encodes the specified MethodDescriptorProto message. Does not implicitly {@link google.protobuf.MethodDescriptorProto.verify|verify} messages.
@@ -12366,14 +14483,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a MethodDescriptorProto message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.MethodDescriptorProto
              * @static
              * @param {google.protobuf.MethodDescriptorProto} message MethodDescriptorProto
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            MethodDescriptorProto.toObject = function toObject(message, options) {
+            MethodDescriptorProto._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -12401,13 +14518,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a MethodDescriptorProto message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.MethodDescriptorProto
+             * @static
+             * @param {google.protobuf.MethodDescriptorProto} message MethodDescriptorProto
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MethodDescriptorProto.toObject = function (message, options) {
+                return {
+                    ...MethodDescriptorProto._toObject(message, options),
+                    __type: "MethodDescriptorProto",
+                };
+            };
+
+            /**
              * Converts this MethodDescriptorProto to JSON.
              * @function toJSON
              * @memberof google.protobuf.MethodDescriptorProto
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            MethodDescriptorProto.prototype.toJSON = function toJSON() {
+            MethodDescriptorProto.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -12456,13 +14589,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IFileOptions=} [properties] Properties to set
              */
+
             function FileOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            FileOptions.type = 'FileOptions';
+            FileOptions.prototype.type = 'FileOptions';
 
             /**
              * FileOptions javaPackage.
@@ -12595,6 +14728,51 @@ $root.google = (function() {
             FileOptions.create = function create(properties) {
                 return new FileOptions(properties);
             };
+
+            var fieldNameMap = {
+                1: 'javaPackage',
+                8: 'javaOuterClassname',
+                10: 'javaMultipleFiles',
+                20: 'javaGenerateEqualsAndHash',
+                27: 'javaStringCheckUtf8',
+                9: 'optimizeFor',
+                11: 'goPackage',
+                16: 'ccGenericServices',
+                17: 'javaGenericServices',
+                18: 'pyGenericServices',
+                23: 'deprecated',
+                31: 'ccEnableArenas',
+                36: 'objcClassPrefix',
+                37: 'csharpNamespace',
+                999: 'uninterpretedOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.FileOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} FileOptions field name
+             */
+            FileOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.FileOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} FileOptions field name
+             */
+            FileOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            FileOptions.prototype.fieldByNumber = FileOptions.fieldByNumber;
 
             /**
              * Encodes the specified FileOptions message. Does not implicitly {@link google.protobuf.FileOptions.verify|verify} messages.
@@ -12882,14 +15060,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a FileOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.FileOptions
              * @static
              * @param {google.protobuf.FileOptions} message FileOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            FileOptions.toObject = function toObject(message, options) {
+            FileOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -12948,13 +15126,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a FileOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.FileOptions
+             * @static
+             * @param {google.protobuf.FileOptions} message FileOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FileOptions.toObject = function (message, options) {
+                return {
+                    ...FileOptions._toObject(message, options),
+                    __type: "FileOptions",
+                };
+            };
+
+            /**
              * Converts this FileOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.FileOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            FileOptions.prototype.toJSON = function toJSON() {
+            FileOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -13009,13 +15203,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IMessageOptions=} [properties] Properties to set
              */
+
             function MessageOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            MessageOptions.type = 'MessageOptions';
+            MessageOptions.prototype.type = 'MessageOptions';
 
             /**
              * MessageOptions messageSetWireFormat.
@@ -13068,6 +15262,41 @@ $root.google = (function() {
             MessageOptions.create = function create(properties) {
                 return new MessageOptions(properties);
             };
+
+            var fieldNameMap = {
+                1: 'messageSetWireFormat',
+                2: 'noStandardDescriptorAccessor',
+                3: 'deprecated',
+                7: 'mapEntry',
+                999: 'uninterpretedOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.MessageOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} MessageOptions field name
+             */
+            MessageOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.MessageOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} MessageOptions field name
+             */
+            MessageOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            MessageOptions.prototype.fieldByNumber = MessageOptions.fieldByNumber;
 
             /**
              * Encodes the specified MessageOptions message. Does not implicitly {@link google.protobuf.MessageOptions.verify|verify} messages.
@@ -13237,14 +15466,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a MessageOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.MessageOptions
              * @static
              * @param {google.protobuf.MessageOptions} message MessageOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            MessageOptions.toObject = function toObject(message, options) {
+            MessageOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -13273,13 +15502,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a MessageOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.MessageOptions
+             * @static
+             * @param {google.protobuf.MessageOptions} message MessageOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MessageOptions.toObject = function (message, options) {
+                return {
+                    ...MessageOptions._toObject(message, options),
+                    __type: "MessageOptions",
+                };
+            };
+
+            /**
              * Converts this MessageOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.MessageOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            MessageOptions.prototype.toJSON = function toJSON() {
+            MessageOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -13320,13 +15565,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
              */
+
             function FieldOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            FieldOptions.type = 'FieldOptions';
+            FieldOptions.prototype.type = 'FieldOptions';
 
             /**
              * FieldOptions ctype.
@@ -13395,6 +15640,43 @@ $root.google = (function() {
             FieldOptions.create = function create(properties) {
                 return new FieldOptions(properties);
             };
+
+            var fieldNameMap = {
+                1: 'ctype',
+                2: 'packed',
+                6: 'jstype',
+                5: 'lazy',
+                3: 'deprecated',
+                10: 'weak',
+                999: 'uninterpretedOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.FieldOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} FieldOptions field name
+             */
+            FieldOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.FieldOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} FieldOptions field name
+             */
+            FieldOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            FieldOptions.prototype.fieldByNumber = FieldOptions.fieldByNumber;
 
             /**
              * Encodes the specified FieldOptions message. Does not implicitly {@link google.protobuf.FieldOptions.verify|verify} messages.
@@ -13620,14 +15902,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a FieldOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.FieldOptions
              * @static
              * @param {google.protobuf.FieldOptions} message FieldOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            FieldOptions.toObject = function toObject(message, options) {
+            FieldOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -13662,13 +15944,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a FieldOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.FieldOptions
+             * @static
+             * @param {google.protobuf.FieldOptions} message FieldOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FieldOptions.toObject = function (message, options) {
+                return {
+                    ...FieldOptions._toObject(message, options),
+                    __type: "FieldOptions",
+                };
+            };
+
+            /**
              * Converts this FieldOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.FieldOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            FieldOptions.prototype.toJSON = function toJSON() {
+            FieldOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -13735,13 +16033,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IOneofOptions=} [properties] Properties to set
              */
+
             function OneofOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            OneofOptions.type = 'OneofOptions';
+            OneofOptions.prototype.type = 'OneofOptions';
 
             /**
              * OneofOptions uninterpretedOption.
@@ -13762,6 +16060,37 @@ $root.google = (function() {
             OneofOptions.create = function create(properties) {
                 return new OneofOptions(properties);
             };
+
+            var fieldNameMap = {
+                999: 'uninterpretedOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.OneofOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} OneofOptions field name
+             */
+            OneofOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.OneofOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} OneofOptions field name
+             */
+            OneofOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            OneofOptions.prototype.fieldByNumber = OneofOptions.fieldByNumber;
 
             /**
              * Encodes the specified OneofOptions message. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
@@ -13891,14 +16220,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.OneofOptions
              * @static
              * @param {google.protobuf.OneofOptions} message OneofOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            OneofOptions.toObject = function toObject(message, options) {
+            OneofOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -13913,13 +16242,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.OneofOptions
+             * @static
+             * @param {google.protobuf.OneofOptions} message OneofOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            OneofOptions.toObject = function (message, options) {
+                return {
+                    ...OneofOptions._toObject(message, options),
+                    __type: "OneofOptions",
+                };
+            };
+
+            /**
              * Converts this OneofOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.OneofOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            OneofOptions.prototype.toJSON = function toJSON() {
+            OneofOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -13957,13 +16302,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IEnumOptions=} [properties] Properties to set
              */
+
             function EnumOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            EnumOptions.type = 'EnumOptions';
+            EnumOptions.prototype.type = 'EnumOptions';
 
             /**
              * EnumOptions allowAlias.
@@ -14008,6 +16353,40 @@ $root.google = (function() {
             EnumOptions.create = function create(properties) {
                 return new EnumOptions(properties);
             };
+
+            var fieldNameMap = {
+                2: 'allowAlias',
+                3: 'deprecated',
+                999: 'uninterpretedOption',
+                42113038: '.jspb.test.IsExtension.simpleOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.EnumOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} EnumOptions field name
+             */
+            EnumOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.EnumOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} EnumOptions field name
+             */
+            EnumOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            EnumOptions.prototype.fieldByNumber = EnumOptions.fieldByNumber;
 
             /**
              * Encodes the specified EnumOptions message. Does not implicitly {@link google.protobuf.EnumOptions.verify|verify} messages.
@@ -14167,14 +16546,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from an EnumOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.EnumOptions
              * @static
              * @param {google.protobuf.EnumOptions} message EnumOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            EnumOptions.toObject = function toObject(message, options) {
+            EnumOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -14200,13 +16579,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from an EnumOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.EnumOptions
+             * @static
+             * @param {google.protobuf.EnumOptions} message EnumOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            EnumOptions.toObject = function (message, options) {
+                return {
+                    ...EnumOptions._toObject(message, options),
+                    __type: "EnumOptions",
+                };
+            };
+
+            /**
              * Converts this EnumOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.EnumOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            EnumOptions.prototype.toJSON = function toJSON() {
+            EnumOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -14242,13 +16637,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IEnumValueOptions=} [properties] Properties to set
              */
+
             function EnumValueOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            EnumValueOptions.type = 'EnumValueOptions';
+            EnumValueOptions.prototype.type = 'EnumValueOptions';
 
             /**
              * EnumValueOptions deprecated.
@@ -14277,6 +16672,38 @@ $root.google = (function() {
             EnumValueOptions.create = function create(properties) {
                 return new EnumValueOptions(properties);
             };
+
+            var fieldNameMap = {
+                1: 'deprecated',
+                999: 'uninterpretedOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.EnumValueOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} EnumValueOptions field name
+             */
+            EnumValueOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.EnumValueOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} EnumValueOptions field name
+             */
+            EnumValueOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            EnumValueOptions.prototype.fieldByNumber = EnumValueOptions.fieldByNumber;
 
             /**
              * Encodes the specified EnumValueOptions message. Does not implicitly {@link google.protobuf.EnumValueOptions.verify|verify} messages.
@@ -14416,14 +16843,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from an EnumValueOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.EnumValueOptions
              * @static
              * @param {google.protobuf.EnumValueOptions} message EnumValueOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            EnumValueOptions.toObject = function toObject(message, options) {
+            EnumValueOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -14442,13 +16869,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from an EnumValueOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.EnumValueOptions
+             * @static
+             * @param {google.protobuf.EnumValueOptions} message EnumValueOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            EnumValueOptions.toObject = function (message, options) {
+                return {
+                    ...EnumValueOptions._toObject(message, options),
+                    __type: "EnumValueOptions",
+                };
+            };
+
+            /**
              * Converts this EnumValueOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.EnumValueOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            EnumValueOptions.prototype.toJSON = function toJSON() {
+            EnumValueOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -14484,13 +16927,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IServiceOptions=} [properties] Properties to set
              */
+
             function ServiceOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            ServiceOptions.type = 'ServiceOptions';
+            ServiceOptions.prototype.type = 'ServiceOptions';
 
             /**
              * ServiceOptions deprecated.
@@ -14519,6 +16962,38 @@ $root.google = (function() {
             ServiceOptions.create = function create(properties) {
                 return new ServiceOptions(properties);
             };
+
+            var fieldNameMap = {
+                33: 'deprecated',
+                999: 'uninterpretedOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.ServiceOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} ServiceOptions field name
+             */
+            ServiceOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.ServiceOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} ServiceOptions field name
+             */
+            ServiceOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            ServiceOptions.prototype.fieldByNumber = ServiceOptions.fieldByNumber;
 
             /**
              * Encodes the specified ServiceOptions message. Does not implicitly {@link google.protobuf.ServiceOptions.verify|verify} messages.
@@ -14658,14 +17133,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a ServiceOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.ServiceOptions
              * @static
              * @param {google.protobuf.ServiceOptions} message ServiceOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            ServiceOptions.toObject = function toObject(message, options) {
+            ServiceOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -14684,13 +17159,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a ServiceOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.ServiceOptions
+             * @static
+             * @param {google.protobuf.ServiceOptions} message ServiceOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ServiceOptions.toObject = function (message, options) {
+                return {
+                    ...ServiceOptions._toObject(message, options),
+                    __type: "ServiceOptions",
+                };
+            };
+
+            /**
              * Converts this ServiceOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.ServiceOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            ServiceOptions.prototype.toJSON = function toJSON() {
+            ServiceOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -14727,13 +17218,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IMethodOptions=} [properties] Properties to set
              */
+
             function MethodOptions(properties) {
-                this.uninterpretedOption = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            MethodOptions.type = 'MethodOptions';
+            MethodOptions.prototype.type = 'MethodOptions';
 
             /**
              * MethodOptions deprecated.
@@ -14770,6 +17261,39 @@ $root.google = (function() {
             MethodOptions.create = function create(properties) {
                 return new MethodOptions(properties);
             };
+
+            var fieldNameMap = {
+                33: 'deprecated',
+                34: 'idempotencyLevel',
+                999: 'uninterpretedOption'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.MethodOptions
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} MethodOptions field name
+             */
+            MethodOptions.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.MethodOptions
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} MethodOptions field name
+             */
+            MethodOptions.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            MethodOptions.prototype.fieldByNumber = MethodOptions.fieldByNumber;
 
             /**
              * Encodes the specified MethodOptions message. Does not implicitly {@link google.protobuf.MethodOptions.verify|verify} messages.
@@ -14937,14 +17461,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a MethodOptions message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.MethodOptions
              * @static
              * @param {google.protobuf.MethodOptions} message MethodOptions
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            MethodOptions.toObject = function toObject(message, options) {
+            MethodOptions._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -14967,13 +17491,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a MethodOptions message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.MethodOptions
+             * @static
+             * @param {google.protobuf.MethodOptions} message MethodOptions
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MethodOptions.toObject = function (message, options) {
+                return {
+                    ...MethodOptions._toObject(message, options),
+                    __type: "MethodOptions",
+                };
+            };
+
+            /**
              * Converts this MethodOptions to JSON.
              * @function toJSON
              * @memberof google.protobuf.MethodOptions
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            MethodOptions.prototype.toJSON = function toJSON() {
+            MethodOptions.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -15030,13 +17570,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IUninterpretedOption=} [properties] Properties to set
              */
+
             function UninterpretedOption(properties) {
-                this.name = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            UninterpretedOption.type = 'UninterpretedOption';
+            UninterpretedOption.prototype.type = 'UninterpretedOption';
 
             /**
              * UninterpretedOption name.
@@ -15105,6 +17645,43 @@ $root.google = (function() {
             UninterpretedOption.create = function create(properties) {
                 return new UninterpretedOption(properties);
             };
+
+            var fieldNameMap = {
+                2: 'name',
+                3: 'identifierValue',
+                4: 'positiveIntValue',
+                5: 'negativeIntValue',
+                6: 'doubleValue',
+                7: 'stringValue',
+                8: 'aggregateValue'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.UninterpretedOption
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} UninterpretedOption field name
+             */
+            UninterpretedOption.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.UninterpretedOption
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} UninterpretedOption field name
+             */
+            UninterpretedOption.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            UninterpretedOption.prototype.fieldByNumber = UninterpretedOption.fieldByNumber;
 
             /**
              * Encodes the specified UninterpretedOption message. Does not implicitly {@link google.protobuf.UninterpretedOption.verify|verify} messages.
@@ -15311,14 +17888,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from an UninterpretedOption message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.UninterpretedOption
              * @static
              * @param {google.protobuf.UninterpretedOption} message UninterpretedOption
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            UninterpretedOption.toObject = function toObject(message, options) {
+            UninterpretedOption._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -15373,13 +17950,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from an UninterpretedOption message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.UninterpretedOption
+             * @static
+             * @param {google.protobuf.UninterpretedOption} message UninterpretedOption
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            UninterpretedOption.toObject = function (message, options) {
+                return {
+                    ...UninterpretedOption._toObject(message, options),
+                    __type: "UninterpretedOption",
+                };
+            };
+
+            /**
              * Converts this UninterpretedOption to JSON.
              * @function toJSON
              * @memberof google.protobuf.UninterpretedOption
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            UninterpretedOption.prototype.toJSON = function toJSON() {
+            UninterpretedOption.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -15412,12 +18005,13 @@ $root.google = (function() {
                  * @constructor
                  * @param {google.protobuf.UninterpretedOption.INamePart=} [properties] Properties to set
                  */
+
                 function NamePart(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                NamePart.type = 'NamePart';
+                NamePart.prototype.type = 'NamePart';
 
                 /**
                  * NamePart namePart.
@@ -15446,6 +18040,38 @@ $root.google = (function() {
                 NamePart.create = function create(properties) {
                     return new NamePart(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'namePart',
+                    2: 'isExtension'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof google.protobuf.UninterpretedOption.NamePart
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} NamePart field name
+                 */
+                NamePart.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof google.protobuf.UninterpretedOption.NamePart
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} NamePart field name
+                 */
+                NamePart.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                NamePart.prototype.fieldByNumber = NamePart.fieldByNumber;
 
                 /**
                  * Encodes the specified NamePart message. Does not implicitly {@link google.protobuf.UninterpretedOption.NamePart.verify|verify} messages.
@@ -15568,14 +18194,14 @@ $root.google = (function() {
 
                 /**
                  * Creates a plain object from a NamePart message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof google.protobuf.UninterpretedOption.NamePart
                  * @static
                  * @param {google.protobuf.UninterpretedOption.NamePart} message NamePart
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                NamePart.toObject = function toObject(message, options) {
+                NamePart._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -15591,13 +18217,29 @@ $root.google = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a NamePart message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UninterpretedOption.NamePart
+                 * @static
+                 * @param {google.protobuf.UninterpretedOption.NamePart} message NamePart
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                NamePart.toObject = function (message, options) {
+                    return {
+                        ...NamePart._toObject(message, options),
+                        __type: "NamePart",
+                    };
+                };
+
+                /**
                  * Converts this NamePart to JSON.
                  * @function toJSON
                  * @memberof google.protobuf.UninterpretedOption.NamePart
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                NamePart.prototype.toJSON = function toJSON() {
+                NamePart.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -15635,13 +18277,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.ISourceCodeInfo=} [properties] Properties to set
              */
+
             function SourceCodeInfo(properties) {
-                this.location = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            SourceCodeInfo.type = 'SourceCodeInfo';
+            SourceCodeInfo.prototype.type = 'SourceCodeInfo';
 
             /**
              * SourceCodeInfo location.
@@ -15662,6 +18304,37 @@ $root.google = (function() {
             SourceCodeInfo.create = function create(properties) {
                 return new SourceCodeInfo(properties);
             };
+
+            var fieldNameMap = {
+                1: 'location'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.SourceCodeInfo
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} SourceCodeInfo field name
+             */
+            SourceCodeInfo.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.SourceCodeInfo
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} SourceCodeInfo field name
+             */
+            SourceCodeInfo.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            SourceCodeInfo.prototype.fieldByNumber = SourceCodeInfo.fieldByNumber;
 
             /**
              * Encodes the specified SourceCodeInfo message. Does not implicitly {@link google.protobuf.SourceCodeInfo.verify|verify} messages.
@@ -15791,14 +18464,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a SourceCodeInfo message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.SourceCodeInfo
              * @static
              * @param {google.protobuf.SourceCodeInfo} message SourceCodeInfo
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            SourceCodeInfo.toObject = function toObject(message, options) {
+            SourceCodeInfo._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -15813,13 +18486,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a SourceCodeInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.SourceCodeInfo
+             * @static
+             * @param {google.protobuf.SourceCodeInfo} message SourceCodeInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SourceCodeInfo.toObject = function (message, options) {
+                return {
+                    ...SourceCodeInfo._toObject(message, options),
+                    __type: "SourceCodeInfo",
+                };
+            };
+
+            /**
              * Converts this SourceCodeInfo to JSON.
              * @function toJSON
              * @memberof google.protobuf.SourceCodeInfo
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            SourceCodeInfo.prototype.toJSON = function toJSON() {
+            SourceCodeInfo.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -15855,15 +18544,13 @@ $root.google = (function() {
                  * @constructor
                  * @param {google.protobuf.SourceCodeInfo.ILocation=} [properties] Properties to set
                  */
+
                 function Location(properties) {
-                    this.path = [];
-                    this.span = [];
-                    this.leadingDetachedComments = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                Location.type = 'Location';
+                Location.prototype.type = 'Location';
 
                 /**
                  * Location path.
@@ -15916,6 +18603,41 @@ $root.google = (function() {
                 Location.create = function create(properties) {
                     return new Location(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'path',
+                    2: 'span',
+                    3: 'leadingComments',
+                    4: 'trailingComments',
+                    6: 'leadingDetachedComments'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof google.protobuf.SourceCodeInfo.Location
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} Location field name
+                 */
+                Location.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof google.protobuf.SourceCodeInfo.Location
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} Location field name
+                 */
+                Location.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                Location.prototype.fieldByNumber = Location.fieldByNumber;
 
                 /**
                  * Encodes the specified Location message. Does not implicitly {@link google.protobuf.SourceCodeInfo.Location.verify|verify} messages.
@@ -16120,14 +18842,14 @@ $root.google = (function() {
 
                 /**
                  * Creates a plain object from a Location message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof google.protobuf.SourceCodeInfo.Location
                  * @static
                  * @param {google.protobuf.SourceCodeInfo.Location} message Location
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Location.toObject = function toObject(message, options) {
+                Location._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -16163,13 +18885,29 @@ $root.google = (function() {
                 };
 
                 /**
+                 * Creates a plain object from a Location message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.SourceCodeInfo.Location
+                 * @static
+                 * @param {google.protobuf.SourceCodeInfo.Location} message Location
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Location.toObject = function (message, options) {
+                    return {
+                        ...Location._toObject(message, options),
+                        __type: "Location",
+                    };
+                };
+
+                /**
                  * Converts this Location to JSON.
                  * @function toJSON
                  * @memberof google.protobuf.SourceCodeInfo.Location
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Location.prototype.toJSON = function toJSON() {
+                Location.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
@@ -16207,13 +18945,13 @@ $root.google = (function() {
              * @constructor
              * @param {google.protobuf.IGeneratedCodeInfo=} [properties] Properties to set
              */
+
             function GeneratedCodeInfo(properties) {
-                this.annotation = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            GeneratedCodeInfo.type = 'GeneratedCodeInfo';
+            GeneratedCodeInfo.prototype.type = 'GeneratedCodeInfo';
 
             /**
              * GeneratedCodeInfo annotation.
@@ -16234,6 +18972,37 @@ $root.google = (function() {
             GeneratedCodeInfo.create = function create(properties) {
                 return new GeneratedCodeInfo(properties);
             };
+
+            var fieldNameMap = {
+                1: 'annotation'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof google.protobuf.GeneratedCodeInfo
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} GeneratedCodeInfo field name
+             */
+            GeneratedCodeInfo.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof google.protobuf.GeneratedCodeInfo
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} GeneratedCodeInfo field name
+             */
+            GeneratedCodeInfo.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            GeneratedCodeInfo.prototype.fieldByNumber = GeneratedCodeInfo.fieldByNumber;
 
             /**
              * Encodes the specified GeneratedCodeInfo message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
@@ -16363,14 +19132,14 @@ $root.google = (function() {
 
             /**
              * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof google.protobuf.GeneratedCodeInfo
              * @static
              * @param {google.protobuf.GeneratedCodeInfo} message GeneratedCodeInfo
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            GeneratedCodeInfo.toObject = function toObject(message, options) {
+            GeneratedCodeInfo._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -16385,13 +19154,29 @@ $root.google = (function() {
             };
 
             /**
+             * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.protobuf.GeneratedCodeInfo
+             * @static
+             * @param {google.protobuf.GeneratedCodeInfo} message GeneratedCodeInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            GeneratedCodeInfo.toObject = function (message, options) {
+                return {
+                    ...GeneratedCodeInfo._toObject(message, options),
+                    __type: "GeneratedCodeInfo",
+                };
+            };
+
+            /**
              * Converts this GeneratedCodeInfo to JSON.
              * @function toJSON
              * @memberof google.protobuf.GeneratedCodeInfo
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            GeneratedCodeInfo.prototype.toJSON = function toJSON() {
+            GeneratedCodeInfo.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -16426,13 +19211,13 @@ $root.google = (function() {
                  * @constructor
                  * @param {google.protobuf.GeneratedCodeInfo.IAnnotation=} [properties] Properties to set
                  */
+
                 function Annotation(properties) {
-                    this.path = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
+                    setProperties(this, properties);
                 }
+
+                Annotation.type = 'Annotation';
+                Annotation.prototype.type = 'Annotation';
 
                 /**
                  * Annotation path.
@@ -16477,6 +19262,40 @@ $root.google = (function() {
                 Annotation.create = function create(properties) {
                     return new Annotation(properties);
                 };
+
+                var fieldNameMap = {
+                    1: 'path',
+                    2: 'sourceFile',
+                    3: 'begin',
+                    4: 'end'
+                };
+
+                /**
+                 * Get a field number from its name
+                 * @function fieldNumberByName
+                 * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                 * @static
+                 * @param {string} Name of field to convert
+                 * @returns {Number} Annotation field name
+                 */
+                Annotation.fieldNumberByName = function fieldNumberByName(name) {
+                    var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                    return Number(num);
+                };
+
+                /**
+                 * Get a field name from it's numeric id
+                 * @function fieldByNumber
+                 * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                 * @static
+                 * @param {number} Number of field to convert
+                 * @returns {String} Annotation field name
+                 */
+                Annotation.fieldByNumber = function fieldByNumber(num) {
+                    return fieldNameMap[num];
+                };
+
+                Annotation.prototype.fieldByNumber = Annotation.fieldByNumber;
 
                 /**
                  * Encodes the specified Annotation message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
@@ -16639,14 +19458,14 @@ $root.google = (function() {
 
                 /**
                  * Creates a plain object from an Annotation message. Also converts values to other types if specified.
-                 * @function toObject
+                 * @function _toObject
                  * @memberof google.protobuf.GeneratedCodeInfo.Annotation
                  * @static
                  * @param {google.protobuf.GeneratedCodeInfo.Annotation} message Annotation
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Annotation.toObject = function toObject(message, options) {
+                Annotation._toObject = function _toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
@@ -16672,13 +19491,29 @@ $root.google = (function() {
                 };
 
                 /**
+                 * Creates a plain object from an Annotation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.GeneratedCodeInfo.Annotation
+                 * @static
+                 * @param {google.protobuf.GeneratedCodeInfo.Annotation} message Annotation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Annotation.toObject = function (message, options) {
+                    return {
+                        ...Annotation._toObject(message, options),
+                        __type: "Annotation",
+                    };
+                };
+
+                /**
                  * Converts this Annotation to JSON.
                  * @function toJSON
                  * @memberof google.protobuf.GeneratedCodeInfo.Annotation
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Annotation.prototype.toJSON = function toJSON() {
+                Annotation.prototype.toObject = function toObject() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 

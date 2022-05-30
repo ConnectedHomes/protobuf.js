@@ -9,6 +9,14 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.test_vector_tile || ($protobuf.roots.test_vector_tile = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.vector_tile = (function() {
 
     /**
@@ -35,13 +43,13 @@ $root.vector_tile = (function() {
          * @constructor
          * @param {vector_tile.ITile=} [properties] Properties to set
          */
+
         function Tile(properties) {
-            this.layers = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+            setProperties(this, properties);
         }
+
+        Tile.type = 'Tile';
+        Tile.prototype.type = 'Tile';
 
         /**
          * Tile layers.
@@ -62,6 +70,37 @@ $root.vector_tile = (function() {
         Tile.create = function create(properties) {
             return new Tile(properties);
         };
+
+        var fieldNameMap = {
+            3: 'layers'
+        };
+
+        /**
+         * Get a field number from its name
+         * @function fieldNumberByName
+         * @memberof vector_tile.Tile
+         * @static
+         * @param {string} Name of field to convert
+         * @returns {Number} Tile field name
+         */
+        Tile.fieldNumberByName = function fieldNumberByName(name) {
+            var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+            return Number(num);
+        };
+
+        /**
+         * Get a field name from it's numeric id
+         * @function fieldByNumber
+         * @memberof vector_tile.Tile
+         * @static
+         * @param {number} Number of field to convert
+         * @returns {String} Tile field name
+         */
+        Tile.fieldByNumber = function fieldByNumber(num) {
+            return fieldNameMap[num];
+        };
+
+        Tile.prototype.fieldByNumber = Tile.fieldByNumber;
 
         /**
          * Encodes the specified Tile message. Does not implicitly {@link vector_tile.Tile.verify|verify} messages.
@@ -191,14 +230,14 @@ $root.vector_tile = (function() {
 
         /**
          * Creates a plain object from a Tile message. Also converts values to other types if specified.
-         * @function toObject
+         * @function _toObject
          * @memberof vector_tile.Tile
          * @static
          * @param {vector_tile.Tile} message Tile
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        Tile.toObject = function toObject(message, options) {
+        Tile._toObject = function _toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -213,13 +252,29 @@ $root.vector_tile = (function() {
         };
 
         /**
+         * Creates a plain object from a Tile message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof vector_tile.Tile
+         * @static
+         * @param {vector_tile.Tile} message Tile
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Tile.toObject = function (message, options) {
+            return {
+                ...Tile._toObject(message, options),
+                __type: "Tile",
+            };
+        };
+
+        /**
          * Converts this Tile to JSON.
          * @function toJSON
          * @memberof vector_tile.Tile
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        Tile.prototype.toJSON = function toJSON() {
+        Tile.prototype.toObject = function toObject() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
@@ -275,12 +330,13 @@ $root.vector_tile = (function() {
              * @constructor
              * @param {vector_tile.Tile.IValue=} [properties] Properties to set
              */
+
             function Value(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Value.type = 'Value';
+            Value.prototype.type = 'Value';
 
             /**
              * Value stringValue.
@@ -349,6 +405,43 @@ $root.vector_tile = (function() {
             Value.create = function create(properties) {
                 return new Value(properties);
             };
+
+            var fieldNameMap = {
+                1: 'stringValue',
+                2: 'floatValue',
+                3: 'doubleValue',
+                4: 'intValue',
+                5: 'uintValue',
+                6: 'sintValue',
+                7: 'boolValue'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof vector_tile.Tile.Value
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Value field name
+             */
+            Value.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof vector_tile.Tile.Value
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Value field name
+             */
+            Value.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Value.prototype.fieldByNumber = Value.fieldByNumber;
 
             /**
              * Encodes the specified Value message. Does not implicitly {@link vector_tile.Tile.Value.verify|verify} messages.
@@ -542,14 +635,14 @@ $root.vector_tile = (function() {
 
             /**
              * Creates a plain object from a Value message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof vector_tile.Tile.Value
              * @static
              * @param {vector_tile.Tile.Value} message Value
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Value.toObject = function toObject(message, options) {
+            Value._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -601,13 +694,29 @@ $root.vector_tile = (function() {
             };
 
             /**
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof vector_tile.Tile.Value
+             * @static
+             * @param {vector_tile.Tile.Value} message Value
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Value.toObject = function (message, options) {
+                return {
+                    ...Value._toObject(message, options),
+                    __type: "Value",
+                };
+            };
+
+            /**
              * Converts this Value to JSON.
              * @function toJSON
              * @memberof vector_tile.Tile.Value
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Value.prototype.toJSON = function toJSON() {
+            Value.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -645,14 +754,13 @@ $root.vector_tile = (function() {
              * @constructor
              * @param {vector_tile.Tile.IFeature=} [properties] Properties to set
              */
+
             function Feature(properties) {
-                this.tags = [];
-                this.geometry = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Feature.type = 'Feature';
+            Feature.prototype.type = 'Feature';
 
             /**
              * Feature id.
@@ -697,6 +805,40 @@ $root.vector_tile = (function() {
             Feature.create = function create(properties) {
                 return new Feature(properties);
             };
+
+            var fieldNameMap = {
+                1: 'id',
+                2: 'tags',
+                3: 'type',
+                4: 'geometry'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof vector_tile.Tile.Feature
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Feature field name
+             */
+            Feature.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof vector_tile.Tile.Feature
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Feature field name
+             */
+            Feature.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Feature.prototype.fieldByNumber = Feature.fieldByNumber;
 
             /**
              * Encodes the specified Feature message. Does not implicitly {@link vector_tile.Tile.Feature.verify|verify} messages.
@@ -909,14 +1051,14 @@ $root.vector_tile = (function() {
 
             /**
              * Creates a plain object from a Feature message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof vector_tile.Tile.Feature
              * @static
              * @param {vector_tile.Tile.Feature} message Feature
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Feature.toObject = function toObject(message, options) {
+            Feature._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -953,13 +1095,29 @@ $root.vector_tile = (function() {
             };
 
             /**
+             * Creates a plain object from a Feature message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof vector_tile.Tile.Feature
+             * @static
+             * @param {vector_tile.Tile.Feature} message Feature
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Feature.toObject = function (message, options) {
+                return {
+                    ...Feature._toObject(message, options),
+                    __type: "Feature",
+                };
+            };
+
+            /**
              * Converts this Feature to JSON.
              * @function toJSON
              * @memberof vector_tile.Tile.Feature
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Feature.prototype.toJSON = function toJSON() {
+            Feature.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
@@ -999,15 +1157,13 @@ $root.vector_tile = (function() {
              * @constructor
              * @param {vector_tile.Tile.ILayer=} [properties] Properties to set
              */
+
             function Layer(properties) {
-                this.features = [];
-                this.keys = [];
-                this.values = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            Layer.type = 'Layer';
+            Layer.prototype.type = 'Layer';
 
             /**
              * Layer version.
@@ -1068,6 +1224,42 @@ $root.vector_tile = (function() {
             Layer.create = function create(properties) {
                 return new Layer(properties);
             };
+
+            var fieldNameMap = {
+                15: 'version',
+                1: 'name',
+                2: 'features',
+                3: 'keys',
+                4: 'values',
+                5: 'extent'
+            };
+
+            /**
+             * Get a field number from its name
+             * @function fieldNumberByName
+             * @memberof vector_tile.Tile.Layer
+             * @static
+             * @param {string} Name of field to convert
+             * @returns {Number} Layer field name
+             */
+            Layer.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            /**
+             * Get a field name from it's numeric id
+             * @function fieldByNumber
+             * @memberof vector_tile.Tile.Layer
+             * @static
+             * @param {number} Number of field to convert
+             * @returns {String} Layer field name
+             */
+            Layer.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            Layer.prototype.fieldByNumber = Layer.fieldByNumber;
 
             /**
              * Encodes the specified Layer message. Does not implicitly {@link vector_tile.Tile.Layer.verify|verify} messages.
@@ -1276,14 +1468,14 @@ $root.vector_tile = (function() {
 
             /**
              * Creates a plain object from a Layer message. Also converts values to other types if specified.
-             * @function toObject
+             * @function _toObject
              * @memberof vector_tile.Tile.Layer
              * @static
              * @param {vector_tile.Tile.Layer} message Layer
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Layer.toObject = function toObject(message, options) {
+            Layer._toObject = function _toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -1322,13 +1514,29 @@ $root.vector_tile = (function() {
             };
 
             /**
+             * Creates a plain object from a Layer message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof vector_tile.Tile.Layer
+             * @static
+             * @param {vector_tile.Tile.Layer} message Layer
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Layer.toObject = function (message, options) {
+                return {
+                    ...Layer._toObject(message, options),
+                    __type: "Layer",
+                };
+            };
+
+            /**
              * Converts this Layer to JSON.
              * @function toJSON
              * @memberof vector_tile.Tile.Layer
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Layer.prototype.toJSON = function toJSON() {
+            Layer.prototype.toObject = function toObject() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 

@@ -9,6 +9,14 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.test_rpc || ($protobuf.roots.test_rpc = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.MyService = (function() {
 
     /**
@@ -94,12 +102,13 @@ $root.MyRequest = (function() {
      * @constructor
      * @param {IMyRequest=} [properties] Properties to set
      */
+
     function MyRequest(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    MyRequest.type = 'MyRequest';
+    MyRequest.prototype.type = 'MyRequest';
 
     /**
      * MyRequest path.
@@ -120,6 +129,37 @@ $root.MyRequest = (function() {
     MyRequest.create = function create(properties) {
         return new MyRequest(properties);
     };
+
+    var fieldNameMap = {
+        1: 'path'
+    };
+
+    /**
+     * Get a field number from its name
+     * @function fieldNumberByName
+     * @memberof MyRequest
+     * @static
+     * @param {string} Name of field to convert
+     * @returns {Number} MyRequest field name
+     */
+    MyRequest.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    /**
+     * Get a field name from it's numeric id
+     * @function fieldByNumber
+     * @memberof MyRequest
+     * @static
+     * @param {number} Number of field to convert
+     * @returns {String} MyRequest field name
+     */
+    MyRequest.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    MyRequest.prototype.fieldByNumber = MyRequest.fieldByNumber;
 
     /**
      * Encodes the specified MyRequest message. Does not implicitly {@link MyRequest.verify|verify} messages.
@@ -232,14 +272,14 @@ $root.MyRequest = (function() {
 
     /**
      * Creates a plain object from a MyRequest message. Also converts values to other types if specified.
-     * @function toObject
+     * @function _toObject
      * @memberof MyRequest
      * @static
      * @param {MyRequest} message MyRequest
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    MyRequest.toObject = function toObject(message, options) {
+    MyRequest._toObject = function _toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -251,13 +291,29 @@ $root.MyRequest = (function() {
     };
 
     /**
+     * Creates a plain object from a MyRequest message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof MyRequest
+     * @static
+     * @param {MyRequest} message MyRequest
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    MyRequest.toObject = function (message, options) {
+        return {
+            ...MyRequest._toObject(message, options),
+            __type: "MyRequest",
+        };
+    };
+
+    /**
      * Converts this MyRequest to JSON.
      * @function toJSON
      * @memberof MyRequest
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    MyRequest.prototype.toJSON = function toJSON() {
+    MyRequest.prototype.toObject = function toObject() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
@@ -292,12 +348,13 @@ $root.MyResponse = (function() {
      * @constructor
      * @param {IMyResponse=} [properties] Properties to set
      */
+
     function MyResponse(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    MyResponse.type = 'MyResponse';
+    MyResponse.prototype.type = 'MyResponse';
 
     /**
      * MyResponse status.
@@ -318,6 +375,37 @@ $root.MyResponse = (function() {
     MyResponse.create = function create(properties) {
         return new MyResponse(properties);
     };
+
+    var fieldNameMap = {
+        2: 'status'
+    };
+
+    /**
+     * Get a field number from its name
+     * @function fieldNumberByName
+     * @memberof MyResponse
+     * @static
+     * @param {string} Name of field to convert
+     * @returns {Number} MyResponse field name
+     */
+    MyResponse.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    /**
+     * Get a field name from it's numeric id
+     * @function fieldByNumber
+     * @memberof MyResponse
+     * @static
+     * @param {number} Number of field to convert
+     * @returns {String} MyResponse field name
+     */
+    MyResponse.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    MyResponse.prototype.fieldByNumber = MyResponse.fieldByNumber;
 
     /**
      * Encodes the specified MyResponse message. Does not implicitly {@link MyResponse.verify|verify} messages.
@@ -430,14 +518,14 @@ $root.MyResponse = (function() {
 
     /**
      * Creates a plain object from a MyResponse message. Also converts values to other types if specified.
-     * @function toObject
+     * @function _toObject
      * @memberof MyResponse
      * @static
      * @param {MyResponse} message MyResponse
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    MyResponse.toObject = function toObject(message, options) {
+    MyResponse._toObject = function _toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -449,13 +537,29 @@ $root.MyResponse = (function() {
     };
 
     /**
+     * Creates a plain object from a MyResponse message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof MyResponse
+     * @static
+     * @param {MyResponse} message MyResponse
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    MyResponse.toObject = function (message, options) {
+        return {
+            ...MyResponse._toObject(message, options),
+            __type: "MyResponse",
+        };
+    };
+
+    /**
      * Converts this MyResponse to JSON.
      * @function toJSON
      * @memberof MyResponse
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    MyResponse.prototype.toJSON = function toJSON() {
+    MyResponse.prototype.toObject = function toObject() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 

@@ -1,6 +1,6 @@
 {
   "name": "@connected-home/protobufjs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "versionScheme": "~",
   "description": "Protocol Buffers for JavaScript (& TypeScript).",
   "author": "Peter Bevan<peter.bevan@hivehome.com>",

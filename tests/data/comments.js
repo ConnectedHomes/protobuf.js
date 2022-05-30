@@ -9,6 +9,14 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.test_comments || ($protobuf.roots.test_comments = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.Test1 = (function() {
 
     /**
@@ -31,12 +39,13 @@ $root.Test1 = (function() {
      * @constructor
      * @param {ITest1=} [properties] Properties to set
      */
+
     function Test1(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    Test1.type = 'Test1';
+    Test1.prototype.type = 'Test1';
 
     /**
      * Field with a comment.
@@ -73,6 +82,39 @@ $root.Test1 = (function() {
     Test1.create = function create(properties) {
         return new Test1(properties);
     };
+
+    var fieldNameMap = {
+        1: 'field1',
+        2: 'field2',
+        3: 'field3'
+    };
+
+    /**
+     * Get a field number from its name
+     * @function fieldNumberByName
+     * @memberof Test1
+     * @static
+     * @param {string} Name of field to convert
+     * @returns {Number} Test1 field name
+     */
+    Test1.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    /**
+     * Get a field name from it's numeric id
+     * @function fieldByNumber
+     * @memberof Test1
+     * @static
+     * @param {number} Number of field to convert
+     * @returns {String} Test1 field name
+     */
+    Test1.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    Test1.prototype.fieldByNumber = Test1.fieldByNumber;
 
     /**
      * Encodes the specified Test1 message. Does not implicitly {@link Test1.verify|verify} messages.
@@ -205,14 +247,14 @@ $root.Test1 = (function() {
 
     /**
      * Creates a plain object from a Test1 message. Also converts values to other types if specified.
-     * @function toObject
+     * @function _toObject
      * @memberof Test1
      * @static
      * @param {Test1} message Test1
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    Test1.toObject = function toObject(message, options) {
+    Test1._toObject = function _toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -231,13 +273,29 @@ $root.Test1 = (function() {
     };
 
     /**
+     * Creates a plain object from a Test1 message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Test1
+     * @static
+     * @param {Test1} message Test1
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Test1.toObject = function (message, options) {
+        return {
+            ...Test1._toObject(message, options),
+            __type: "Test1",
+        };
+    };
+
+    /**
      * Converts this Test1 to JSON.
      * @function toJSON
      * @memberof Test1
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    Test1.prototype.toJSON = function toJSON() {
+    Test1.prototype.toObject = function toObject() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
@@ -271,12 +329,13 @@ $root.Test2 = (function() {
      * @constructor
      * @param {ITest2=} [properties] Properties to set
      */
+
     function Test2(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    Test2.type = 'Test2';
+    Test2.prototype.type = 'Test2';
 
     /**
      * Creates a new Test2 instance using the specified properties.
@@ -289,6 +348,36 @@ $root.Test2 = (function() {
     Test2.create = function create(properties) {
         return new Test2(properties);
     };
+
+    var fieldNameMap = {
+    };
+
+    /**
+     * Get a field number from its name
+     * @function fieldNumberByName
+     * @memberof Test2
+     * @static
+     * @param {string} Name of field to convert
+     * @returns {Number} Test2 field name
+     */
+    Test2.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    /**
+     * Get a field name from it's numeric id
+     * @function fieldByNumber
+     * @memberof Test2
+     * @static
+     * @param {number} Number of field to convert
+     * @returns {String} Test2 field name
+     */
+    Test2.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    Test2.prototype.fieldByNumber = Test2.fieldByNumber;
 
     /**
      * Encodes the specified Test2 message. Does not implicitly {@link Test2.verify|verify} messages.
@@ -390,6 +479,19 @@ $root.Test2 = (function() {
 
     /**
      * Creates a plain object from a Test2 message. Also converts values to other types if specified.
+     * @function _toObject
+     * @memberof Test2
+     * @static
+     * @param {Test2} message Test2
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Test2._toObject = function _toObject() {
+        return {};
+    };
+
+    /**
+     * Creates a plain object from a Test2 message. Also converts values to other types if specified.
      * @function toObject
      * @memberof Test2
      * @static
@@ -397,8 +499,11 @@ $root.Test2 = (function() {
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    Test2.toObject = function toObject() {
-        return {};
+    Test2.toObject = function (message, options) {
+        return {
+            ...Test2._toObject(message, options),
+            __type: "Test2",
+        };
     };
 
     /**
@@ -408,7 +513,7 @@ $root.Test2 = (function() {
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    Test2.prototype.toJSON = function toJSON() {
+    Test2.prototype.toObject = function toObject() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
@@ -434,6 +539,7 @@ $root.Test2 = (function() {
  * @property {number} TWO=2 TWO value
  * @property {number} THREE=3 Preferred value with a comment.
  * @property {number} FOUR=4 Other value with a comment.
+ * @property {number} FIVE=5 Leading comment for value with both types of comments after field with trailing comment.
  */
 $root.Test3 = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -441,6 +547,7 @@ $root.Test3 = (function() {
     values[valuesById[2] = "TWO"] = 2;
     values[valuesById[3] = "THREE"] = 3;
     values[valuesById[4] = "FOUR"] = 4;
+    values[valuesById[5] = "FIVE"] = 5;
     return values;
 })();
 

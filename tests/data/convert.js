@@ -9,6 +9,14 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.test_convert || ($protobuf.roots.test_convert = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.Message = (function() {
 
     /**
@@ -34,17 +42,13 @@ $root.Message = (function() {
      * @constructor
      * @param {IMessage=} [properties] Properties to set
      */
+
     function Message(properties) {
-        this.stringRepeated = [];
-        this.uint64Repeated = [];
-        this.bytesRepeated = [];
-        this.enumRepeated = [];
-        this.int64Map = {};
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    Message.type = 'Message';
+    Message.prototype.type = 'Message';
 
     /**
      * Message stringVal.
@@ -129,6 +133,45 @@ $root.Message = (function() {
     Message.create = function create(properties) {
         return new Message(properties);
     };
+
+    var fieldNameMap = {
+        1: 'stringVal',
+        2: 'stringRepeated',
+        3: 'uint64Val',
+        4: 'uint64Repeated',
+        5: 'bytesVal',
+        6: 'bytesRepeated',
+        7: 'enumVal',
+        8: 'enumRepeated',
+        9: 'int64Map'
+    };
+
+    /**
+     * Get a field number from its name
+     * @function fieldNumberByName
+     * @memberof Message
+     * @static
+     * @param {string} Name of field to convert
+     * @returns {Number} Message field name
+     */
+    Message.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    /**
+     * Get a field name from it's numeric id
+     * @function fieldByNumber
+     * @memberof Message
+     * @static
+     * @param {number} Number of field to convert
+     * @returns {String} Message field name
+     */
+    Message.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    Message.prototype.fieldByNumber = Message.fieldByNumber;
 
     /**
      * Encodes the specified Message message. Does not implicitly {@link Message.verify|verify} messages.
@@ -470,14 +513,14 @@ $root.Message = (function() {
 
     /**
      * Creates a plain object from a Message message. Also converts values to other types if specified.
-     * @function toObject
+     * @function _toObject
      * @memberof Message
      * @static
      * @param {Message} message Message
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    Message.toObject = function toObject(message, options) {
+    Message._toObject = function _toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -552,13 +595,29 @@ $root.Message = (function() {
     };
 
     /**
+     * Creates a plain object from a Message message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Message
+     * @static
+     * @param {Message} message Message
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Message.toObject = function (message, options) {
+        return {
+            ...Message._toObject(message, options),
+            __type: "Message",
+        };
+    };
+
+    /**
      * Converts this Message to JSON.
      * @function toJSON
      * @memberof Message
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    Message.prototype.toJSON = function toJSON() {
+    Message.prototype.toObject = function toObject() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 

@@ -9,6 +9,14 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.test_type_url || ($protobuf.roots.test_type_url = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.TypeUrlTest = (function() {
 
     /**
@@ -26,12 +34,13 @@ $root.TypeUrlTest = (function() {
      * @constructor
      * @param {ITypeUrlTest=} [properties] Properties to set
      */
+
     function TypeUrlTest(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    TypeUrlTest.type = 'TypeUrlTest';
+    TypeUrlTest.prototype.type = 'TypeUrlTest';
 
     /**
      * TypeUrlTest nested.
@@ -52,6 +61,37 @@ $root.TypeUrlTest = (function() {
     TypeUrlTest.create = function create(properties) {
         return new TypeUrlTest(properties);
     };
+
+    var fieldNameMap = {
+        1: 'nested'
+    };
+
+    /**
+     * Get a field number from its name
+     * @function fieldNumberByName
+     * @memberof TypeUrlTest
+     * @static
+     * @param {string} Name of field to convert
+     * @returns {Number} TypeUrlTest field name
+     */
+    TypeUrlTest.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    /**
+     * Get a field name from it's numeric id
+     * @function fieldByNumber
+     * @memberof TypeUrlTest
+     * @static
+     * @param {number} Number of field to convert
+     * @returns {String} TypeUrlTest field name
+     */
+    TypeUrlTest.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    TypeUrlTest.prototype.fieldByNumber = TypeUrlTest.fieldByNumber;
 
     /**
      * Encodes the specified TypeUrlTest message. Does not implicitly {@link TypeUrlTest.verify|verify} messages.
@@ -169,14 +209,14 @@ $root.TypeUrlTest = (function() {
 
     /**
      * Creates a plain object from a TypeUrlTest message. Also converts values to other types if specified.
-     * @function toObject
+     * @function _toObject
      * @memberof TypeUrlTest
      * @static
      * @param {TypeUrlTest} message TypeUrlTest
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    TypeUrlTest.toObject = function toObject(message, options) {
+    TypeUrlTest._toObject = function _toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -188,13 +228,29 @@ $root.TypeUrlTest = (function() {
     };
 
     /**
+     * Creates a plain object from a TypeUrlTest message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof TypeUrlTest
+     * @static
+     * @param {TypeUrlTest} message TypeUrlTest
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    TypeUrlTest.toObject = function (message, options) {
+        return {
+            ...TypeUrlTest._toObject(message, options),
+            __type: "TypeUrlTest",
+        };
+    };
+
+    /**
      * Converts this TypeUrlTest to JSON.
      * @function toJSON
      * @memberof TypeUrlTest
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    TypeUrlTest.prototype.toJSON = function toJSON() {
+    TypeUrlTest.prototype.toObject = function toObject() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
@@ -226,12 +282,13 @@ $root.TypeUrlTest = (function() {
          * @constructor
          * @param {TypeUrlTest.INested=} [properties] Properties to set
          */
+
         function Nested(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+            setProperties(this, properties);
         }
+
+        Nested.type = 'Nested';
+        Nested.prototype.type = 'Nested';
 
         /**
          * Nested a.
@@ -252,6 +309,37 @@ $root.TypeUrlTest = (function() {
         Nested.create = function create(properties) {
             return new Nested(properties);
         };
+
+        var fieldNameMap = {
+            1: 'a'
+        };
+
+        /**
+         * Get a field number from its name
+         * @function fieldNumberByName
+         * @memberof TypeUrlTest.Nested
+         * @static
+         * @param {string} Name of field to convert
+         * @returns {Number} Nested field name
+         */
+        Nested.fieldNumberByName = function fieldNumberByName(name) {
+            var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+            return Number(num);
+        };
+
+        /**
+         * Get a field name from it's numeric id
+         * @function fieldByNumber
+         * @memberof TypeUrlTest.Nested
+         * @static
+         * @param {number} Number of field to convert
+         * @returns {String} Nested field name
+         */
+        Nested.fieldByNumber = function fieldByNumber(num) {
+            return fieldNameMap[num];
+        };
+
+        Nested.prototype.fieldByNumber = Nested.fieldByNumber;
 
         /**
          * Encodes the specified Nested message. Does not implicitly {@link TypeUrlTest.Nested.verify|verify} messages.
@@ -364,14 +452,14 @@ $root.TypeUrlTest = (function() {
 
         /**
          * Creates a plain object from a Nested message. Also converts values to other types if specified.
-         * @function toObject
+         * @function _toObject
          * @memberof TypeUrlTest.Nested
          * @static
          * @param {TypeUrlTest.Nested} message Nested
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        Nested.toObject = function toObject(message, options) {
+        Nested._toObject = function _toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -383,13 +471,29 @@ $root.TypeUrlTest = (function() {
         };
 
         /**
+         * Creates a plain object from a Nested message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof TypeUrlTest.Nested
+         * @static
+         * @param {TypeUrlTest.Nested} message Nested
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Nested.toObject = function (message, options) {
+            return {
+                ...Nested._toObject(message, options),
+                __type: "Nested",
+            };
+        };
+
+        /**
          * Converts this Nested to JSON.
          * @function toJSON
          * @memberof TypeUrlTest.Nested
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        Nested.prototype.toJSON = function toJSON() {
+        Nested.prototype.toObject = function toObject() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 

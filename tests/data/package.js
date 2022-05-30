@@ -9,6 +9,14 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots.test_package || ($protobuf.roots.test_package = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.Package = (function() {
 
     /**
@@ -42,18 +50,13 @@ $root.Package = (function() {
      * @constructor
      * @param {IPackage=} [properties] Properties to set
      */
+
     function Package(properties) {
-        this.keywords = [];
-        this.bin = {};
-        this.scripts = {};
-        this.dependencies = {};
-        this.devDependencies = {};
-        this.cliDependencies = [];
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    Package.type = 'Package';
+    Package.prototype.type = 'Package';
 
     /**
      * Package name.
@@ -202,6 +205,53 @@ $root.Package = (function() {
     Package.create = function create(properties) {
         return new Package(properties);
     };
+
+    var fieldNameMap = {
+        1: 'name',
+        2: 'version',
+        19: 'versionScheme',
+        3: 'description',
+        4: 'author',
+        5: 'license',
+        6: 'repository',
+        7: 'bugs',
+        8: 'homepage',
+        9: 'keywords',
+        10: 'main',
+        11: 'bin',
+        12: 'scripts',
+        13: 'dependencies',
+        15: 'devDependencies',
+        17: 'types',
+        18: 'cliDependencies'
+    };
+
+    /**
+     * Get a field number from its name
+     * @function fieldNumberByName
+     * @memberof Package
+     * @static
+     * @param {string} Name of field to convert
+     * @returns {Number} Package field name
+     */
+    Package.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    /**
+     * Get a field name from it's numeric id
+     * @function fieldByNumber
+     * @memberof Package
+     * @static
+     * @param {number} Number of field to convert
+     * @returns {String} Package field name
+     */
+    Package.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    Package.prototype.fieldByNumber = Package.fieldByNumber;
 
     /**
      * Encodes the specified Package message. Does not implicitly {@link Package.verify|verify} messages.
@@ -623,14 +673,14 @@ $root.Package = (function() {
 
     /**
      * Creates a plain object from a Package message. Also converts values to other types if specified.
-     * @function toObject
+     * @function _toObject
      * @memberof Package
      * @static
      * @param {Package} message Package
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    Package.toObject = function toObject(message, options) {
+    Package._toObject = function _toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -714,13 +764,29 @@ $root.Package = (function() {
     };
 
     /**
+     * Creates a plain object from a Package message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Package
+     * @static
+     * @param {Package} message Package
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Package.toObject = function (message, options) {
+        return {
+            ...Package._toObject(message, options),
+            __type: "Package",
+        };
+    };
+
+    /**
      * Converts this Package to JSON.
      * @function toJSON
      * @memberof Package
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    Package.prototype.toJSON = function toJSON() {
+    Package.prototype.toObject = function toObject() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
@@ -753,12 +819,13 @@ $root.Package = (function() {
          * @constructor
          * @param {Package.IRepository=} [properties] Properties to set
          */
+
         function Repository(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+            setProperties(this, properties);
         }
+
+        Repository.type = 'Repository';
+        Repository.prototype.type = 'Repository';
 
         /**
          * Repository type.
@@ -787,6 +854,38 @@ $root.Package = (function() {
         Repository.create = function create(properties) {
             return new Repository(properties);
         };
+
+        var fieldNameMap = {
+            1: 'type',
+            2: 'url'
+        };
+
+        /**
+         * Get a field number from its name
+         * @function fieldNumberByName
+         * @memberof Package.Repository
+         * @static
+         * @param {string} Name of field to convert
+         * @returns {Number} Repository field name
+         */
+        Repository.fieldNumberByName = function fieldNumberByName(name) {
+            var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+            return Number(num);
+        };
+
+        /**
+         * Get a field name from it's numeric id
+         * @function fieldByNumber
+         * @memberof Package.Repository
+         * @static
+         * @param {number} Number of field to convert
+         * @returns {String} Repository field name
+         */
+        Repository.fieldByNumber = function fieldByNumber(num) {
+            return fieldNameMap[num];
+        };
+
+        Repository.prototype.fieldByNumber = Repository.fieldByNumber;
 
         /**
          * Encodes the specified Repository message. Does not implicitly {@link Package.Repository.verify|verify} messages.
@@ -909,14 +1008,14 @@ $root.Package = (function() {
 
         /**
          * Creates a plain object from a Repository message. Also converts values to other types if specified.
-         * @function toObject
+         * @function _toObject
          * @memberof Package.Repository
          * @static
          * @param {Package.Repository} message Repository
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        Repository.toObject = function toObject(message, options) {
+        Repository._toObject = function _toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -932,13 +1031,29 @@ $root.Package = (function() {
         };
 
         /**
+         * Creates a plain object from a Repository message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof Package.Repository
+         * @static
+         * @param {Package.Repository} message Repository
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Repository.toObject = function (message, options) {
+            return {
+                ...Repository._toObject(message, options),
+                __type: "Repository",
+            };
+        };
+
+        /**
          * Converts this Repository to JSON.
          * @function toJSON
          * @memberof Package.Repository
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        Repository.prototype.toJSON = function toJSON() {
+        Repository.prototype.toObject = function toObject() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 

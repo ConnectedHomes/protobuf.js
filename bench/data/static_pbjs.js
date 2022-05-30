@@ -7,19 +7,46 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 
 var $root = $protobuf.roots.test_bench || ($protobuf.roots.test_bench = {});
 
+function setProperties (context, properties) {
+    return properties && Object.keys(properties).forEach(function(k) {
+        if(properties[k] != null) {
+            context[k] = properties[k];
+        }
+    });
+}
+
 $root.Test = (function() {
 
+
     function Test(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    Test.type = 'Test';
+    Test.prototype.type = 'Test';
 
     Test.prototype.string = "";
     Test.prototype.uint32 = 0;
     Test.prototype.inner = null;
     Test.prototype.float = 0;
+
+    var fieldNameMap = {
+        1: 'string',
+        2: 'uint32',
+        3: 'inner',
+        4: 'float'
+    };
+
+    Test.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    Test.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    Test.prototype.fieldByNumber = Test.fieldByNumber;
 
     Test.encode = function encode(message, writer) {
         if (!writer)
@@ -64,16 +91,34 @@ $root.Test = (function() {
 
     Test.Inner = (function() {
 
+
         function Inner(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
+            setProperties(this, properties);
         }
+
+        Inner.type = 'Inner';
+        Inner.prototype.type = 'Inner';
 
         Inner.prototype.int32 = 0;
         Inner.prototype.innerInner = null;
         Inner.prototype.outer = null;
+
+        var fieldNameMap = {
+            1: 'int32',
+            2: 'innerInner',
+            3: 'outer'
+        };
+
+        Inner.fieldNumberByName = function fieldNumberByName(name) {
+            var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+            return Number(num);
+        };
+
+        Inner.fieldByNumber = function fieldByNumber(num) {
+            return fieldNameMap[num];
+        };
+
+        Inner.prototype.fieldByNumber = Inner.fieldByNumber;
 
         Inner.encode = function encode(message, writer) {
             if (!writer)
@@ -113,16 +158,34 @@ $root.Test = (function() {
 
         Inner.InnerInner = (function() {
 
+
             function InnerInner(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
+                setProperties(this, properties);
             }
+
+            InnerInner.type = 'InnerInner';
+            InnerInner.prototype.type = 'InnerInner';
 
             InnerInner.prototype.long = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
             InnerInner.prototype["enum"] = 0;
             InnerInner.prototype.sint32 = 0;
+
+            var fieldNameMap = {
+                1: 'long',
+                2: 'enum',
+                3: 'sint32'
+            };
+
+            InnerInner.fieldNumberByName = function fieldNumberByName(name) {
+                var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+                return Number(num);
+            };
+
+            InnerInner.fieldByNumber = function fieldByNumber(num) {
+                return fieldNameMap[num];
+            };
+
+            InnerInner.prototype.fieldByNumber = InnerInner.fieldByNumber;
 
             InnerInner.encode = function encode(message, writer) {
                 if (!writer)
@@ -181,16 +244,32 @@ $root.Test = (function() {
 
 $root.Outer = (function() {
 
+
     function Outer(properties) {
-        this.bool = [];
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
+        setProperties(this, properties);
     }
+
+    Outer.type = 'Outer';
+    Outer.prototype.type = 'Outer';
 
     Outer.prototype.bool = $util.emptyArray;
     Outer.prototype.double = 0;
+
+    var fieldNameMap = {
+        1: 'bool',
+        2: 'double'
+    };
+
+    Outer.fieldNumberByName = function fieldNumberByName(name) {
+        var num = Object.keys(fieldNameMap).find(key => fieldNameMap[key] === name);
+        return Number(num);
+    };
+
+    Outer.fieldByNumber = function fieldByNumber(num) {
+        return fieldNameMap[num];
+    };
+
+    Outer.prototype.fieldByNumber = Outer.fieldByNumber;
 
     Outer.encode = function encode(message, writer) {
         if (!writer)

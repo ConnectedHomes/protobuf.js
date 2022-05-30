@@ -15,11 +15,11 @@ function cliTest(test, testFunc) {
     // Alter the require cache to make the cli/targets/static work since it requires "protobufjs"
     // and we don't want to mess with "npm link"
     var savedResolveFilename = Module._resolveFilename;
-    Module._resolveFilename = function(request, parent) { 
-      if (request.startsWith("protobufjs")) {
-        return request;
-      }
-      return savedResolveFilename(request, parent);
+    Module._resolveFilename = function(request, parent) {
+        if (request.startsWith("protobufjs")) {
+            return request;
+        }
+        return savedResolveFilename(request, parent);
     };
     require.cache.protobufjs = require.cache[path.resolve("index.js")];
 
@@ -62,8 +62,10 @@ tape.test("pbjs generates static code", function(test) {
             var obj = {
                 messageInOneof: {
                     value: 42,
+                    __type: "Message",
                 },
                 regularField: "abc",
+                __type: "OneofContainer",
             };
             var obj1 = OneofContainer.toObject(OneofContainer.fromObject(obj));
             test.deepEqual(obj, obj1, "fromObject and toObject work for plain object");
